@@ -42,7 +42,18 @@ svg {
     top: 0;
     padding-top: 60px;
     text-align: center;
-    #close-help {
+
+    #helptext {
+        max-width: 45em;
+        margin: 0 auto;
+        text-align: left;
+        color: $talk-dark;
+        p {
+            color: $topbar-dark;
+        }
+    }
+}
+    #close-help, #close-advice {
         width: 44px;
     height: 44px;
     background: white;
@@ -61,16 +72,18 @@ svg {
     font-size: 50px;
     }
     }
-    #helptext {
-        max-width: 45em;
-        margin: 0 auto;
-        text-align: left;
-        color: $talk-dark;
-        p {
-            color: $topbar-dark;
-        }
+
+    #close-advice {
+        top: 1px;
+    right: 12px;
+    background: none;
+    box-shadow: none;
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    font-weight: 200;
+    color: $topbar-dark;
     }
-}
 
 //playbar
 #playbar {
@@ -378,13 +391,17 @@ hr {
 
 #advice-message-box {
         position: absolute;
-    background: lemonchiffon;
+    background: $vr-yellow;
     padding: 12px;
     border-radius: 4px;
     @include box-shadow(5px, .3);
     p {
     color: $topbar-dark;
     font-weight: 300;
+    max-width: 75%;
+    margin: 0;
+    float:left;
+    min-width: 150px;
     }
 }
 

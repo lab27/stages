@@ -5,16 +5,108 @@ var panelSize = $('.panelbox').outerWidth();
 var serverCirclePos = $('#server-circle-svg').offset()
 var listOpen = false
 var helpOpen = false
+var adviceCount = -1;
+var adviceShowing = false
 //Spotlight
 var sl = [{thing: $('#venue-title'), diameter: 300, msg:"This is the name of your stage."},
 		{thing: $('#back-arrow'), diameter: 150, msg: "See all your stages."},
 		{thing: $('#list-toggle'), diameter: 150, msg: "See the list of all talks."},
-		{thing: $('#current-talk-title .next-talk'), diameter: 300, msg: "The current of next talk."},
+		{thing: $('#current-talk-title .next-talk'), diameter: 200, msg: "The current of next talk."},
 		{thing: $("#server"), diameter: 400, msg: "Control your server."},
 		{thing: $("#source"), diameter: 400, msg: "Control your audio source."},
-		{thing: $("#stream"), diameter: 400, msg: "Control your live stream."}];
+		{thing: $("#stream"), diameter: 400, msg: "Control your live stream."},
+		{thing: $(".autoplay-switch"), diameter: 300, msg: "Set your talks to stream automatically."},
+		{thing: $("#help-link"), diameter: 200, msg: "Help and info about the control panel."}];
 
-var adviceMessages = [{message: "You're a little early. You can come back tomorrow at 14:30."}]
+var adviceMessages = [
+	{message: "You're a little early. You can come back tomorrow at 14:30."},
+	{message: "Good news! Your server can be started."},
+	{message: "Excellent! Your server is up and running. Now it's time to choose how you'll stream."},
+	{message: "Heads up! Your talk is scheduled to start soon."},
+	{message: "You're on the air!"}]
+
+	//TL max:
+var tmax_options = {
+  delay: 0,
+  paused: false,
+  onComplete: function() {
+    console.log('animation is complete');
+  },
+  onCompleteScope: {},
+  tweens: [],
+  stagger: 0,
+  align: 'normal',
+  useFrames: false,
+  onStart: function() {
+    console.log('on start called');
+    showNextMsg();
+  },
+  onStartScope: {},
+  onUpdate: function() {
+    console.log('on update called');
+  },
+  onUpdateScope: {},
+  onRepeat: function() {
+    console.log('on repeat called');
+  },
+  onRepeatScope: {},
+  onReverseComplete: function() {
+    console.log('on reverse complete');
+  },
+  onReverseCompleteScope: {},
+  autoRemoveChildren: false,
+  smoothChildTiming: false,
+  repeat: 0,
+  repeatDelay: 0,
+  yoyo: false,
+  onCompleteParams: [],
+  onReverseCompleteParams: [],
+  onStartParams: [],
+  onUpdateParams: [],
+  onRepeatParams: []
+};
+
+//advice message timeline
+var adviceMessageTL = new TimelineMax(tmax_options)
+
+
+var hideAdvice = function(){
+	console.log("hide advice")
+	//move it away
+	TweenMax.to($('#advice-message-box'),.2,{autoAlpha: 0, top:-200,left:"50%",ease:Power2.easeOut, onComplete:function(){
+		
+		adviceCount ++
+		adviceShowing=false
+		TweenMax.to($('#advice-messages-bg'),.2,{autoAlpha:0})
+		console.log("new msg: " + adviceMessages[adviceCount].message)
+		$('#advice-message-box p').html(adviceMessages[adviceCount].message)
+	}})
+};
+
+var showAdvice = function(){
+	console.log("show advice")
+	console.log("counter: " + adviceCount)
+	//load the message
+	//$('#advice-message-box p').html(adviceMessages[num].message)
+	//load positions
+	var myMarginLeft = -1*($('#advice-message-box').outerWidth()/2)
+	var myMarginTop = -1*($('#advice-message-box').outerHeight()/2)
+	//move it into place
+	adviceMessageTL
+		.to($('#advice-messages-bg'),.2,{autoAlpha:1})
+		.to($('#advice-message-box'),.3,{autoAlpha: 1,top:200,left:"50%",marginLeft:myMarginLeft,marginTop:myMarginTop,ease:Power2.easeOut,onComplete:function(){
+			adviceShowing=true
+		}})
+};
+
+$('#close-advice').on('click',function(){
+	hideAdvice()
+});
+
+
+// $('#venue-title').on('click',function(){
+// 	showAdvice()
+// });
 
 //slCounter 
 var slCounter = -1;
@@ -87,8 +179,13 @@ var showNextMsg = function() {
 
 //temp trigger with Logo
 $('.avatar').on('click',function(){
+	if(adviceShowing==true){
+		hideAdvice()
+	}
 	$('#server-button').removeClass('hide').addClass('pulse')
-	showNextMsg()
+	showAdvice()
+	// showNextMsg()
+
 });
 
 
@@ -97,12 +194,16 @@ $('.avatar').on('click',function(){
 $('#server-button').on('click',function(){
 	TweenMax.to($(this),.5,{autoAlpha:0,scaleX:0,scaleY:0,ease:Power2.easeOut})
 	//showNextMsg()
+	hideAdvice()
 	tl.play()
 })
 
 //launch device selector 
 $('#source-button').on('click',function(){
 	TweenMax.to($(this),.2,{autoAlpha:0})
+	if(adviceShowing==true){
+		hideAdvice()
+	}
 	launchDeviceSelector()
 });
 
@@ -116,47 +217,11 @@ $('.box2-select').on('click',function(){
 
 $('#stream-button').on('click',function(){
 	tl.play()
+	if(adviceShowing==true){
+		hideAdvice()
+	}
 })
-//TL max:
-var tmax_options = {
-  delay: 0,
-  paused: false,
-  onComplete: function() {
-    console.log('animation is complete');
-  },
-  onCompleteScope: {},
-  tweens: [],
-  stagger: 0,
-  align: 'normal',
-  useFrames: false,
-  onStart: function() {
-    console.log('on start called');
-    showNextMsg();
-  },
-  onStartScope: {},
-  onUpdate: function() {
-    console.log('on update called');
-  },
-  onUpdateScope: {},
-  onRepeat: function() {
-    console.log('on repeat called');
-  },
-  onRepeatScope: {},
-  onReverseComplete: function() {
-    console.log('on reverse complete');
-  },
-  onReverseCompleteScope: {},
-  autoRemoveChildren: false,
-  smoothChildTiming: false,
-  repeat: 0,
-  repeatDelay: 0,
-  yoyo: false,
-  onCompleteParams: [],
-  onReverseCompleteParams: [],
-  onStartParams: [],
-  onUpdateParams: [],
-  onRepeatParams: []
-};
+
 
 //toggle help
 $('#help-link').on('click',function(){
@@ -286,6 +351,7 @@ var nextSpotlight = function(){
 	if (slCounter >= sl.length) {
 		$("#spotlight").addClass('hide')
 		$("#spotlight-msg").addClass('hide')
+		showAdvice()
 	} else {
 
 	showSpotlight(sl[slCounter])
@@ -304,22 +370,18 @@ $('.spotlight-btn').on('click',nextSpotlight);
 $('.cancel-btn').on('click',function(){
 	$("#spotlight").addClass('hide')
 	$("#spotlight-msg").addClass('hide')
+	showAdvice()
 });
 
 
 //TweenMax.staggerTo(panelCircle,1,{scaleX: 1, scaleY: 1, autoAlpha:1, ease: Power2.easeOut},.2)
 
 tl
-	.staggerTo(panelCircle,1,{strokeWidth:5, autoAlpha:1, ease: Power2.easeOut},.2)
+	.staggerTo(panelCircle,1,{strokeWidth:5, autoAlpha:1, ease: Power2.easeOut})
 	.addPause()
-	//.to(serverCircle,2,{drawSVG:"100%"})
-	// .to(serverCircle,.5,{stroke:vrRed})
-	// .set(serverBtn,{className:'-=hide',onComplete:showNextMsg})
-	// .to(serverBtn,.5,{autoAlpha:1,scaleX:1,scaleY:1,ease:Power2.easeOut})
-	//.addPause()
-	//.set(serverCircle,{drawSVG:"0%",stroke:vrLtBlue})
+	//make the server startup:
 	.to(serverCircle,2,{drawSVG:"100%"})
-	.to(serverCircle,.5,{stroke:vrGreen,onComplete:showNextMsg})
+	.to(serverCircle,.5,{stroke:vrGreen,onComplete:showAdvice})
 	.to(serverCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
 		showNextMsg()
 		$('#server-button').remove()
@@ -329,6 +391,7 @@ tl
 	.set(connectionBtn,{className:'-=hide'})
 	.set(connectionBtn,{className:'+=pulse'})
 	.addPause()
+	// make connection success:
 	.to(connectionCircle,.2,{autoAlpha:1,stroke:vrGreen})
 	.to(connectionCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
 		//showNextMsg()
@@ -339,20 +402,22 @@ tl
 	.set(broadcastBtn,{className:"-=hide"})
 	.to(broadcastCircle,.5,{autoAlpha: 1, stroke:vrYellow},"+=5")
 	.set(broadcastBtn,{className:"-=success"})
-	.set(broadcastBtn,{className:"+=warning"})
+	.set(broadcastBtn,{className:"+=warning",onComplete:showAdvice})
 	.set(broadcastBtn,{className:"+=pulse"})
 	.addPause()
 	.to(broadcastCircle,.2,{stroke:vrGreen})
 	.to(broadcastCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
-		showNextMsg()
+		//show advice here?
 		TweenMax.set(broadcastMeter,{stroke:vrGreen,autoAlpha:.5})
 		renderChart("#stream-circle-svg")
 		TweenMax.to(broadcastBtn,.2,{autoAlpha:0})
+		showAdvice()
 	}});
 
 	$(document).ready(function(){
 		$('.svg-circle').attr("class", "svg-circle");
 		tl.play()
+		hideAdvice()
 
 	})
 

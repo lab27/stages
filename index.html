@@ -9,27 +9,24 @@ talk: Teaching An Old Dog New Tricks
 {% include help.html %}
 <div id="controls">
 <div id="panels">
-  {% include panel.html name='server' text='launch' %}
-  {% include panel.html name='source' text='select' %}
-  {% include panel.html name='stream' text='start' %}
+	{% include panel.html name='server' text='launch' %}
+	{% include panel.html name='source' text='select' %}
+	{% include panel.html name='stream' text='start' %}
 </div>
 <div id="advice-messages-holder">
-	<div id="advice-messages-bg"></div>
-	<div id="advice-message-box">
+	<!-- <div id="advice-messages-bg" style="visibility: hidden; opacity: 0;"></div> -->
+	<div id="advice-message-box" style="visibility: hidden; opacity: 0;">
+		<button id="close-advice"><span>&times;</span></button>
 		<p>Advice</p>
 	</div>
-
 </div>
 <div class="row clearfix" id="playbar">
 	<div class="small-6 columns"></div>
 	<div class="small-6 columns text-center clearfix switch-holder">
 		{% include switch.html name="autoplay" %}
-
 	</div>
 </div>
-
 </div>
-
 <div id="spotlight"></div>
 <div id="spotlight-msg" class="" style="opacity:0">
 <p id="msg" class="float-left clearfix">Want to take a tour of the control panel?</p>
