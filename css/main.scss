@@ -34,6 +34,7 @@ svg {
     padding: 24px;
     background: #eee;
     width: 100%;
+    max-width: none;
     height: auto;
     min-height: 100vh;
     z-index: 1000;
@@ -64,16 +65,32 @@ svg {
         max-width: 45em;
         margin: 0 auto;
         text-align: left;
+        color: $talk-dark;
+        p {
+            color: $topbar-dark;
+        }
     }
 }
 
-//switch 
-.switch {
-    margin-top: -40%;
+//playbar
+#playbar {
+    position: absolute;
+    background: #f9f9f9;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: none;
+    height: 60px;
+    box-shadow: 0 -1px 3px rgba($talk-dark, .3);
 }
+
+.switch-holder {
+    padding-top: 14px;
+}
+
 .switch-paddle {
     background: $neutralColor;
-    border-radius: 1em;
+    border-radius: 16px;
     &:after {
         border-radius: 50%;
     }
@@ -88,6 +105,8 @@ input:checked ~ .switch-paddle {
     font-weight: 300;
     text-transform: uppercase;
     margin:0;
+    padding-top: 3px;
+    padding-right: 12px;
 }
 
 
@@ -180,7 +199,7 @@ hr {
 
     @include box-shadow(3px, 0.3);
 
-    max-height: 80px;
+    max-height: 72px;
     position: relative;
     z-index: 900;
     color: $topbar-dark;
@@ -196,7 +215,7 @@ hr {
         }
     }
 
-    padding: 24px;
+    padding: 20px 24px;
 
     svg {
         width: 24px;
@@ -205,7 +224,7 @@ hr {
 }
 
 #dropdown {
-    padding-top: 20px;
+    padding-top: 18px;
 }
 
 #list-toggle {
@@ -345,7 +364,30 @@ hr {
 #panels {
     -ms-flex: 0 0 80vw;
     flex: 0 0 80vw;
+    margin-bottom: 48px;
 }
+
+#advice-messages-bg {
+    position: absolute;
+    background: rgba($talk-dark, .8);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#advice-message-box {
+        position: absolute;
+    background: lemonchiffon;
+    padding: 12px;
+    border-radius: 4px;
+    @include box-shadow(5px, .3);
+    p {
+    color: $topbar-dark;
+    font-weight: 300;
+    }
+}
+
 
 #msg-center {
     padding: 0;
@@ -567,7 +609,7 @@ html, body {
 
 #titlebar {
     padding-top: 21px;
-    height: 80px;
+    height: 72px;
 
     /* margin-bottom: 60px;*/
     .label {
@@ -586,8 +628,8 @@ html, body {
 
     p#venue-title {
         color: $topbar-dark;
-        font-weight: 300;
-        font-size: rem-calc(21);
+        font-weight: normal;
+        font-size: 1.25rem;
         text-transform: uppercase;
         letter-spacing: rem-calc(2);
         font-family: $header-font-family;

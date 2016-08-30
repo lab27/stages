@@ -14,7 +14,7 @@ var sl = [{thing: $('#venue-title'), diameter: 300, msg:"This is the name of you
 		{thing: $("#source"), diameter: 400, msg: "Control your audio source."},
 		{thing: $("#stream"), diameter: 400, msg: "Control your live stream."}];
 
-var messages = [{message: "You're a little early. You can come back tomorrow at 14:30."}]
+var adviceMessages = [{message: "You're a little early. You can come back tomorrow at 14:30."}]
 
 //slCounter 
 var slCounter = -1;
