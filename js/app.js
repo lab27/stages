@@ -319,7 +319,7 @@ var showSpotlight = function(o) {
 	console.log('showing spotlight ' + curSl + " of " + totalSl)
 	var btnText = "Next"
 	var cancelBtnText = "Skip tour"
-	console.log("object: " + JSON.stringify(o))
+	console.log("object: " + JSON.stringify(o).innerHTML)
 	o.width=o.diameter;
 	o.height=o.diameter;
 	o.marginLeft = (-1*(o.diameter/2))
