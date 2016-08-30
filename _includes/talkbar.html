@@ -1,0 +1,27 @@
+<div class="row expanded" id="talkbar" style="height: 60px">
+	<div class="row clearfix" id="titlerow">
+		<div class="small-1 columns" id="list-toggle">
+			<a href="#">{% include svg_icon.svg name='list'%}</a>
+		</div>
+		<div class="small-10 columns" id="talk-titlebar">
+			<p id="current-talk-title"><span class="next-talk">NEXT TALK: </span><a href="#">Gorgeous Metal Steering Wheel</a> <span class="time-info">(starts in one day)</span></p>
+		</div>
+		<div class="small-1 columns" id="help-link"><a href="#" class="float-right button">?</a></div>
+	</div>
+	<div class="row clearfix" id="listrow">
+		<div class="small-12 columns talkitem header">
+			<p class="header"><span class="time">Date / Time</span>
+			<span class="title">Title</span>
+			
+		</p>
+	</div>
+	{% for talk in site.data.talks %}
+		<div class="small-12 columns talkitem">
+			<p><span class="time">{{talk.time}}</span>
+			<span class="title">{{talk.title}}</span>
+			
+		</p>
+	</div>
+{% endfor %}
+</div>
+</div>

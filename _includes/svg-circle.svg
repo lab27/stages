@@ -1,0 +1,11 @@
+<svg class="svg-circle hide" id="{{include.name}}-circle-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 168">
+	<circle cx="84" cy="84" r="36.1"/>	
+	<!-- lines -->
+	<g id="spokes"><line class="cls-1" x1="83.43" y1="82.83" x2="78.65" y2="163.13"/><line class="cls-1" x1="82.95" y1="83.09" x2="110.73" y2="158.11"/><line class="cls-1" x1="82.95" y1="83.09" x2="134.99" y2="144.06"/><line class="cls-1" x1="82.95" y1="83.09" x2="152.64" y2="122.64"/><line class="cls-1" x1="82.95" y1="83.09" x2="161.86" y2="96.77"/><line class="cls-1" x1="82.95" y1="83.09" x2="161.8" y2="69.42"/><line class="cls-1" x1="82.95" y1="83.09" x2="152.5" y2="43.61"/><line class="cls-1" x1="82.95" y1="83.09" x2="134.88" y2="22.25"/><line class="cls-1" x1="82.95" y1="83.09" x2="110.76" y2="7.99"/><line class="cls-1" x1="83.43" y1="82.83" x2="83.43" y2="3"/><line class="cls-1" x1="82.95" y1="83.09" x2="55.17" y2="8.02"/><line class="cls-1" x1="82.95" y1="83.09" x2="31.07" y2="22.29"/><line class="cls-1" x1="82.95" y1="83.09" x2="13.48" y2="43.64"/><line class="cls-1" x1="82.95" y1="83.09" x2="4.19" y2="69.44"/><line class="cls-1" x1="82.95" y1="83.09" x2="4.19" y2="96.75"/><line class="cls-1" x1="82.95" y1="83.09" x2="13.34" y2="122.61"/><line class="cls-1" x1="82.95" y1="83.09" x2="30.96" y2="144.01"/><line class="cls-1" x1="82.95" y1="83.09" x2="55.13" y2="158.26"/></g>
+	<path id="hub" d="M95.55,84.09c0,15.68-23.27,15.75-23.27,0S95.55,68.4,95.55,84.09Z" transform="translate(0.17)"/>
+	<!-- outlines -->
+	<path id="base" class="cls-1" d="M163,83.25a80,80,0,0,1-160,0C3,39.2,38.82,3,83,3S163,39.2,163,83.25Z"/>
+	<path id="overlay" class="cls-1" d="M163,83.25a80,80,0,0,1-160,0C3,39.2,38.82,3,83,3S163,39.2,163,83.25Z"/>
+	<!-- check -->
+	<polyline id="check" class="cls-1" points="50.62 76.53 72.73 98.64 122.17 49.2"/>
+</svg>
