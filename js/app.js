@@ -30,7 +30,7 @@ var tmax_options = {
   delay: 0,
   paused: false,
   onComplete: function() {
-    console.log('animation is complete');
+    //console.log('animation is complete');
   },
   onCompleteScope: {},
   tweens: [],
@@ -38,20 +38,20 @@ var tmax_options = {
   align: 'normal',
   useFrames: false,
   onStart: function() {
-    console.log('on start called');
+    //console.log('on start called');
     showNextMsg();
   },
   onStartScope: {},
   onUpdate: function() {
-    console.log('on update called');
+    //console.log('on update called');
   },
   onUpdateScope: {},
   onRepeat: function() {
-    console.log('on repeat called');
+    //console.log('on repeat called');
   },
   onRepeatScope: {},
   onReverseComplete: function() {
-    console.log('on reverse complete');
+    //console.log('on reverse complete');
   },
   onReverseCompleteScope: {},
   autoRemoveChildren: false,
@@ -71,21 +71,21 @@ var adviceMessageTL = new TimelineMax(tmax_options)
 
 
 var hideAdvice = function(){
-	console.log("hide advice")
+	//console.log("hide advice")
 	//move it away
 	TweenMax.to($('#advice-message-box'),.2,{autoAlpha: 0, top:-200,left:"50%",ease:Power2.easeOut, onComplete:function(){
 		
 		adviceCount ++
 		adviceShowing=false
 		TweenMax.to($('#advice-messages-bg'),.2,{autoAlpha:0})
-		console.log("new msg: " + adviceMessages[adviceCount].message)
+		//console.log("new msg: " + adviceMessages[adviceCount].message)
 		$('#advice-message-box p').html(adviceMessages[adviceCount].message)
 	}})
 };
 
 var showAdvice = function(){
-	console.log("show advice")
-	console.log("counter: " + adviceCount)
+	//console.log("show advice")
+	//console.log("counter: " + adviceCount)
 	//load the message
 	//$('#advice-message-box p').html(adviceMessages[num].message)
 	//load positions
@@ -118,7 +118,7 @@ $('.stream-switch').removeClass('hide')
 var slmb = $('#spotlight-msg')
 var slmbMT = -1*($('#spotlight-msg').outerHeight()/2)
 var slmbML = -1*($('#spotlight-msg').outerWidth()/2)
-console.log('outerWidth: '+ slmbML)
+//console.log('outerWidth: '+ slmbML)
 TweenMax.set(slmb,{left:"50%", top: "50%", marginTop: slmbMT, marginLeft: slmbML})
 TweenMax.to(slmb,1,{opacity:1})
 //TweenMax.to($('#spotlight-msg'),.2
@@ -143,9 +143,9 @@ $(startBtn).on('click',function(){
 
 
 $(window).on('resize', function(){
-	//console.log('resize windw')
+	////console.log('resize windw')
 	panelSize = $('.panelbox').outerWidth();
-	console.log('panelSize: '+panelSize)
+	//console.log('panelSize: '+panelSize)
 
 });
 
@@ -159,13 +159,13 @@ var nextMsg = 1;
 
 //show the next msg
 var showNextMsg = function() {
-	console.log("show next message called")
-	//console.log("next msg: " + nextMsg.attr('id'))
+	//console.log("show next message called")
+	////console.log("next msg: " + nextMsg.attr('id'))
 
 
 	var targetMsgBox = $('#messagebox'+currentMsg)
 	var nextMsgBox = $('#messagebox'+nextMsg)
-	console.log("target: " + targetMsgBox.attr('id'))
+	//console.log("target: " + targetMsgBox.attr('id'))
 	$(nextMsgBox).removeClass('hide')
 	//tl.play()
 	TweenMax.to(targetMsgBox,.5,{autoAlpha:0,ease:Power2.easeOut, onComplete:function(){
@@ -254,7 +254,7 @@ $('#list-toggle').on('click', function(){
 
 $('.list-open').on('click',function(){
 	//close the list
-	console('close this list!')
+	//console('close this list!')
 	TweenMax.to(listBox,.3,{height:"60px",ease:Power2.easeOut})
 })
 
@@ -316,10 +316,10 @@ dstl.to(devices,.5,{autoAlpha:1})
 var showSpotlight = function(o) {
 	var curSl = slCounter + 1
 	var totalSl = sl.length 
-	console.log('showing spotlight ' + curSl + " of " + totalSl)
+	//console.log('showing spotlight ' + curSl + " of " + totalSl)
 	var btnText = "Next"
 	var cancelBtnText = "Skip tour"
-	console.log("object: " + JSON.stringify(o).innerHTML)
+	////console.log("object: " + JSON.stringify(o).innerHTML)
 	o.width=o.diameter;
 	o.height=o.diameter;
 	o.marginLeft = (-1*(o.diameter/2))
@@ -347,7 +347,7 @@ var showSpotlight = function(o) {
 
 var nextSpotlight = function(){
 	slCounter ++;
-	// console.log('slcounter: ' + slCounter + ", sl.length: " + sl.length)
+	// //console.log('slcounter: ' + slCounter + ", sl.length: " + sl.length)
 	if (slCounter >= sl.length) {
 		$("#spotlight").addClass('hide')
 		$("#spotlight-msg").addClass('hide')
