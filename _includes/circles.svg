@@ -1,0 +1,102 @@
+<svg version="1.1" id="circles" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 510 168" xml:space="preserve">
+<style type="text/css">
+</style>
+<g id="server">
+
+	<g class="spokes">
+		<line class="st0" x1="85.4" y1="82.7" x2="80.6" y2="163"/>
+		<line class="st0" x1="85" y1="83" x2="112.7" y2="158"/>
+		<line class="st0" x1="85" y1="83" x2="137" y2="143.9"/>
+		<line class="st0" x1="85" y1="83" x2="154.6" y2="122.5"/>
+		<line class="st0" x1="85" y1="83" x2="163.9" y2="96.6"/>
+		<line class="st0" x1="85" y1="83" x2="163.8" y2="69.3"/>
+		<line class="st0" x1="85" y1="83" x2="154.5" y2="43.5"/>
+		<line class="st0" x1="85" y1="83" x2="136.9" y2="22.1"/>
+		<line class="st0" x1="85" y1="83" x2="112.8" y2="7.9"/>
+		<line class="st0" x1="85.4" y1="82.7" x2="85.4" y2="2.9"/>
+		<line class="st0" x1="85" y1="83" x2="57.2" y2="7.9"/>
+		<line class="st0" x1="85" y1="83" x2="33.1" y2="22.2"/>
+		<line class="st0" x1="85" y1="83" x2="15.5" y2="43.5"/>
+		<line class="st0" x1="85" y1="83" x2="6.2" y2="69.3"/>
+		<line class="st0" x1="85" y1="83" x2="6.2" y2="96.6"/>
+		<line class="st0" x1="85" y1="83" x2="15.3" y2="122.5"/>
+		<line class="st0" x1="85" y1="83" x2="33" y2="143.9"/>
+		<line class="st0" x1="85" y1="83" x2="57.1" y2="158.1"/>
+	</g>
+	<path class="hub" d="M97.7,84c0,15.7-23.3,15.8-23.3,0S97.7,68.3,97.7,84z"/>
+	<path class="base" d="M165,83.1c0,44.2-35.8,80-80,80s-80-35.8-80-80c0-44,35.8-80.2,80-80.2S165,39.1,165,83.1z"/>
+	<path class="overlay"  d="M165,83.1c0,44.2-35.8,80-80,80s-80-35.8-80-80c0-44,35.8-80.2,80-80.2S165,39.1,165,83.1z"/>
+	<polyline class="check" points="52.6,76.4 74.7,98.5 124.2,49.1 	"/>
+		<path class="button pulse" style="visibility: hidden; opacity:0;" d="M139.8,84c0,74-109.8,74.3-109.8,0S139.8,10,139.8,84z"/>
+<text transform="matrix(1 0 0 1 56.6407 85.8882)" style="visibility: hidden; opacity:0;">
+			 <tspan x="30" text-anchor="middle">000012340000</tspan>
+
+</text>
+</g>
+<g id="source">
+		<circle cx="255.5" cy="84" r="36"/>	
+	<g class="spokes">
+		<line class="st0" x1="255.4" y1="82.7" x2="250.6" y2="163"/>
+		<line class="st0" x1="255" y1="83" x2="282.7" y2="158"/>
+		<line class="st0" x1="255" y1="83" x2="307" y2="143.9"/>
+		<line class="st0" x1="255" y1="83" x2="324.6" y2="122.5"/>
+		<line class="st0" x1="255" y1="83" x2="333.9" y2="96.6"/>
+		<line class="st0" x1="255" y1="83" x2="333.8" y2="69.3"/>
+		<line class="st0" x1="255" y1="83" x2="324.5" y2="43.5"/>
+		<line class="st0" x1="255" y1="83" x2="306.9" y2="22.1"/>
+		<line class="st0" x1="255" y1="83" x2="282.8" y2="7.9"/>
+		<line class="st0" x1="255.4" y1="82.7" x2="255.4" y2="2.9"/>
+		<line class="st0" x1="255" y1="83" x2="227.2" y2="7.9"/>
+		<line class="st0" x1="255" y1="83" x2="203.1" y2="22.2"/>
+		<line class="st0" x1="255" y1="83" x2="185.5" y2="43.5"/>
+		<line class="st0" x1="255" y1="83" x2="176.2" y2="69.3"/>
+		<line class="st0" x1="255" y1="83" x2="176.2" y2="96.6"/>
+		<line class="st0" x1="255" y1="83" x2="185.3" y2="122.5"/>
+		<line class="st0" x1="255" y1="83" x2="203" y2="143.9"/>
+		<line class="st0" x1="255" y1="83" x2="227.1" y2="158.1"/>
+	</g>
+	<path class="hub" d="M267.7,84c0,15.7-23.3,15.8-23.3,0S267.7,68.3,267.7,84z"/>
+	<path class="base" d="M335,83.1c0,44.2-35.8,80-80,80s-80-35.8-80-80c0-44,35.8-80.2,80-80.2S335,39.1,335,83.1z"/>
+	<path class="overlay" d="M335,83.1c0,44.2-35.8,80-80,80s-80-35.8-80-80c0-44,35.8-80.2,80-80.2S335,39.1,335,83.1z"/>
+	<polyline class="check" points="222.6,76.4 244.7,98.5 294.2,49.1 	"/>
+		<path class="button" style="visibility: hidden; opacity:0;" d="M308.9,84c0,74-109.8,74.3-109.8,0S308.9,10,308.9,84z"/>
+	<text transform="matrix(1 0 0 1 226.6407 85.8882)" style="visibility: hidden; opacity:0;">
+				 <tspan x="30" text-anchor="middle">000012340000</tspan>
+
+	</text>
+
+</g>
+<g id="stream">
+		<circle cx="426" cy="84" r="36"/>	
+	<g class="spokes">
+		<line class="st0" x1="425.4" y1="82.7" x2="420.6" y2="163"/>
+		<line class="st0" x1="424.9" y1="83" x2="452.7" y2="158"/>
+		<line class="st0" x1="424.9" y1="83" x2="476.9" y2="143.9"/>
+		<line class="st0" x1="424.9" y1="83" x2="494.6" y2="122.5"/>
+		<line class="st0" x1="424.9" y1="83" x2="503.8" y2="96.6"/>
+		<line class="st0" x1="424.9" y1="83" x2="503.8" y2="69.3"/>
+		<line class="st0" x1="424.9" y1="83" x2="494.5" y2="43.5"/>
+		<line class="st0" x1="424.9" y1="83" x2="476.8" y2="22.1"/>
+		<line class="st0" x1="424.9" y1="83" x2="452.7" y2="7.9"/>
+		<line class="st0" x1="425.4" y1="82.7" x2="425.4" y2="2.9"/>
+		<line class="st0" x1="424.9" y1="83" x2="397.1" y2="7.9"/>
+		<line class="st0" x1="424.9" y1="83" x2="373" y2="22.2"/>
+		<line class="st0" x1="424.9" y1="83" x2="355.4" y2="43.5"/>
+		<line class="st0" x1="424.9" y1="83" x2="346.1" y2="69.3"/>
+		<line class="st0" x1="424.9" y1="83" x2="346.1" y2="96.6"/>
+		<line class="st0" x1="424.9" y1="83" x2="355.3" y2="122.5"/>
+		<line class="st0" x1="424.9" y1="83" x2="372.9" y2="143.9"/>
+		<line class="st0" x1="424.9" y1="83" x2="397.1" y2="158.1"/>
+	</g>
+	<path class="hub" d="M437.7,84c0,15.7-23.3,15.8-23.3,0S437.7,68.3,437.7,84z"/>
+	<path class="base" d="M505,83.1c0,44.2-35.8,80-80,80s-80-35.8-80-80c0-44,35.8-80.2,80-80.2S505,39.1,505,83.1z"/>
+	<path class="overlay" d="M505,83.1c0,44.2-35.8,80-80,80s-80-35.8-80-80c0-44,35.8-80.2,80-80.2S505,39.1,505,83.1z"/>
+	<polyline class="check" points="392.6,76.4 414.7,98.5 464.1,49.1 	"/>
+		<path class="button" style="visibility: hidden; opacity:0;" d="M480.9,84c0,74-109.8,74.3-109.8,0S480.9,10,480.9,84z"/>
+	<text transform="matrix(1 0 0 1 396.6407 85.8882)" style="visibility: hidden; opacity:0;">
+		 <tspan x="30" text-anchor="middle">000012340000</tspan>
+	</text>
+
+</g>
+</svg>

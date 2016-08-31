@@ -504,7 +504,7 @@ html, body {
 /*   stroke-width: 6px;*/
 /* }*/
 
-.panelbox {
+#panels {
     position: relative;
 
     /* border: 1px dotted $oil;*/
@@ -535,17 +535,33 @@ html, body {
         stroke: $neutralColor;
     }
 
-    path#overlay {
+    path.overlay {
         stroke: rgba($almost-black, 0);
+        transform-origin: 50%;
+    }
+
+    path.button {
+        stroke-width: 0;
+        fill: $success-color;
+        transform-origin: 50%;
     }
 
     line {
         stroke: $bgColor;
     }
 
-    path#hub {
+    path.hub {
         stroke: none;
         fill: $bgColor;
+    }
+
+    text {
+        stroke: none;
+        fill:$talk-dark;
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        pointer-events: none;
     }
 
     .base-ring {
@@ -560,58 +576,11 @@ html, body {
     position: relative;
 }
 
-#server-circle-holder {
-    position: relative;
 
-    #server-circle {
-        position: absolute;
-        border: none;
-        padding: 0;
 
-        svg {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-        }
-    }
-}
 
-.panel-circle-holder {
-    width: 100%;
-    height: 100%;
-    display: block;
 
-    /* border-radius: 80px;*/
-    /* border: 6px solid rgba(black, .3);*/
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0 auto;
-    transition: border .2s ease;
-    position: relative;
 
-    &.success {
-        border: 6px solid #3adb76;
-    }
-
-    svg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform: rotate(-90deg);
-
-        &.neutral-circle path {
-            stroke: rgba(black, 0.4);
-        }
-    }
-}
-
-#broadcast-circle {
-    padding: 0;
-}
-
-#server-circle {
-    svg {}
-}
 
 .start-btn {
     width: 90%;
