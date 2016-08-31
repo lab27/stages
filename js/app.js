@@ -24,7 +24,8 @@ var adviceMessages = [
 	{message: "Excellent! Your server is up and running. Now it's time to choose how you'll stream."},
 	{message: "Heads up! Your talk is scheduled to start soon."},
 	{message: "You're on the air!"},
-	{message: "Oops! We lost you.   "}]
+	{message: "Oops! We lost you.   "},
+	{message: "Aaaaand, we're back.  "}]
 
 	//TL max:
 var tmax_options = {
@@ -404,6 +405,9 @@ tl
 	.set($('#source .bg'),{stroke:"#eee",strokeWidth:15,fill:"#eee"})
 	.to($('#source .overlay'),.2,{stroke:"#eee",strokeWidth:5,stroke:neutralColor})
 	.to($('#server'),1,{x:"90%",ease:Power2.easeOut})
+	// .set(serverCircle,{strokeDasharray:"50%",strokeDashoffset:"25%",strokeLinecap:"round"})
+	// .set($('#server .base'),{stroke:"#eee"})
+	// .set($('#server .bg'),{autoAlpha:0})
 	//show button
 	.to(connectionBtn,.2,{autoAlpha:1,onComplete:function(){
 		$('#source text tspan').html('select')
@@ -418,7 +422,7 @@ tl
 	.set(connectionCircle,{autoAlpha:1,stroke:vrLtBlue,strokeDasharray:"10 10",onComplete:function(){
 		$('#source text tspan').html('connecting...')
 	}})
-	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:50})
+	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:-50})
 		
 	// make connection success:
 	.to(connectionCircle,.2,{autoAlpha:1,stroke:vrGreen,strokeDasharray:"none"})
@@ -454,9 +458,18 @@ tl
 	.set(connectionMeter,{autoAlpha:0})
 	.to($('#stream .bg'),.2,{autoAlpha:1,fill:"#eee",strokeWidth:15, stroke: "#eee"})
 	.to($('#stream'),1,{x:"-90%",ease:Power2.easeOut})
+	//make the stop button
+	.to(broadcastCheck,.2,{autoAlpha:0})
+	.set($('#stream .button'),{className:"-=pulse",transformOrigin: "50% 50%"})
+	.set($('#stream .button'),{scaleX:.4})
+	.set($('#stream .button'),{scaleY:.4})
+	.to($('#stream .button'),.2,{autoAlpha:1,fill:vrRed, onComplete:function(){
+		$('#stream text tspan').html('stop')
+	}})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:"white"})
 	.to($('#stream .overlay'),10,{drawSVG:"5%"})
 	//make it lose connection
-
+	.to($('#stream .button'),.2,{autoAlpha:0})
 	.to($('#source .overlay'),.2,{stroke:neutralColor,onComplete:function(){
 			$('#audioElement').trigger('pause');
 			hideAdvice()
@@ -475,7 +488,36 @@ tl
 	.set($('#stream .base'),{stroke:neutralColor})
 	.to($('#stream'),.5,{x:"0%",ease:Power2.easeOut,onComplete:showAdvice})
 	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:50})
+	//make it reconnect
+	.to($('#source .overlay'),.2,{strokeDasharray:"none",stroke:vrGreen})
+	.to($('#stream text'),.2,{autoAlpha:0})
+	.to($('#stream .base'),.2,{stroke:vrGreen,onComplete:function(){
+		TweenMax.set($('#source text'),{fill:vrGreen})
+		$('#source text tspan').html('CONNECTED')
+	}})
+	.set($('#stream .overlay'),{drawSVG:"0%",transformOrigin: "50% 50%",stroke:"rgba(0,0,0,.3)",rotation:-90})
+	.set(broadcastCheck,{drawSVG:"0%",autoAlpha:1})
+	.to(broadcastCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
+		hideAdvice()
+		$('#audioElement').trigger('play');
 
+		TweenMax.set(broadcastMeter,{stroke:vrGreen,autoAlpha:.5})
+		renderChart("#stream")
+		TweenMax.to(broadcastBtn,.2,{autoAlpha:0})
+		showAdvice()
+	}})
+	.to($('#stream text'),.2,{autoAlpha:0,onComplete:function(){
+		$('#stream text tspan').html('stop')
+	}})
+	.to($('#stream .base'),.2,{stroke:vrGreen})
+	.set(connectionCheck,{autoAlpha:0})
+	.set(connectionMeter,{autoAlpha:0})
+	.to($('#stream'),1,{x:"-90%",ease:Power2.easeOut})
+		.to(broadcastCheck,.2,{autoAlpha:0})
+	.set($('#stream .button'),{className:"-=pulse"})
+	.to($('#stream .button'),.2,{autoAlpha:1})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:"white"})
+	.to($('#stream .overlay'),10,{drawSVG:"15%"})
 	;
 
 	$(document).ready(function(){
