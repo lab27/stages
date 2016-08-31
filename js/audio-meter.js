@@ -23,7 +23,7 @@
 
     // continuously loop and update chart with frequency data.
     function renderChart(el) {
-        console.log("My element: "+ el + ", or my element: " + $(el))
+        //console.log("My element: "+ el + ", or my element: " + $(el))
         var svg = d3.select(el)
         requestAnimationFrame(function(){renderChart(el)});
 
@@ -59,8 +59,8 @@
         circles
             .attr({
                 r: function(d) { return radiusScale(d); },
-                cx: svgWidth / 2,
-                cy: svgHeight / 2,
+                //cx: svgWidth / 2,
+                //cy: svgHeight / 2,
                 fill: 'none',
                 'opacity':1,
                 'stroke-width': volume/5,

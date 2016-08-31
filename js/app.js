@@ -23,7 +23,8 @@ var adviceMessages = [
 	{message: "Good news! Your server can be started."},
 	{message: "Excellent! Your server is up and running. Now it's time to choose how you'll stream."},
 	{message: "Heads up! Your talk is scheduled to start soon."},
-	{message: "You're on the air!"}]
+	{message: "You're on the air!"},
+	{message: "Oops! We lost you.   "}]
 
 	//TL max:
 var tmax_options = {
@@ -131,6 +132,7 @@ var vrBlue 		= "#2c46b0",
 	vrYellow 	= "#ffed00",
 	vrPurple 	= "#a339cd",
 	vrBeige 	= "#fef1de";
+	neutralColor=	"#b4b6be";
 
 $(startBtn).on('click',function(){
 	$('#audioElement').trigger('play');
@@ -215,7 +217,7 @@ $('.box2-select').on('click',function(){
 	dstl.play()
 })
 
-$('#stream-button').on('click',function(){
+$('#stream .button').on('click',function(){
 	tl.play()
 	if(adviceShowing==true){
 		hideAdvice()
@@ -269,10 +271,10 @@ var tl = new TimelineMax(tmax_options),
 				  broadcastCircle = $('#stream path.overlay'),
 				  panelCircle = $('#panels svg')
 				  serverCheck = $('#server polyline.check'),
-				  connectionCheck = $('#source polyline.check'),
+				  connectionCheck = $('#source .check'),
 				  connectionMeter = $('#source circle'),
 				  broadcastMeter = $('#stream circle'),
-				  broadcastCheck = $('#stream polyline.check'),
+				  broadcastCheck = $('#stream .check'),
 				  serverBtn = $('#server .button'),
 				  connectionBtn = $('#source .button'),
 				  broadcastBtn = $('#stream .button'),
@@ -284,7 +286,7 @@ var tl = new TimelineMax(tmax_options),
 				  dstl = new TimelineMax(tmax_options);
 
 
-TweenMax.set(circles,{strokeWidth:4,autoAlpha: 0,fill: "none",stroke: "orange"})
+TweenMax.set(circles,{strokeWidth:5,autoAlpha: 0,fill: "none",stroke:neutralColor })
 TweenMax.set(serverCircle,{drawSVG: "0%",transformOrigin: "50% 50%",stroke:vrLtBlue,rotation:-90})
 TweenMax.set($('polyline.check'),{drawSVG: "0%",stroke:vrGreen})
 TweenMax.set(deviceSelectorLi,{autoAlpha:0,paddingTop:"60px"})
@@ -394,11 +396,14 @@ tl
 	.to($('#server text'),.2,{fill:vrLtBlue,onComplete:function(){
 		$('#server text tspan').html('launching')
 	}})
-	.to(serverCircle,3,{drawSVG:"100%"})
+	.to(serverCircle,1,{drawSVG:"100%"})
 	.to($('#server text'),.2,{autoAlpha:0})
-
 	.to(serverCircle,.5,{stroke:vrGreen,onComplete:showAdvice})
 	.to(serverCheck,.2,{drawSVG:"100%", ease: Power2.easeOut})
+	//unite server with source
+	.set($('#source .bg'),{stroke:"#eee",strokeWidth:15,fill:"#eee"})
+	.to($('#source .overlay'),.2,{stroke:"#eee",strokeWidth:5,stroke:neutralColor})
+	.to($('#server'),1,{x:"90%",ease:Power2.easeOut})
 	//show button
 	.to(connectionBtn,.2,{autoAlpha:1,onComplete:function(){
 		$('#source text tspan').html('select')
@@ -408,7 +413,7 @@ tl
 	//make connection progress:
 	.set(serverBtn,{autoAlpha:0})
 	.set(connectionBtn,{autoAlpha:0})
-	.set($('#source .base'),{autoAlpha:0})
+	.set($('#source .base'),{stroke:"#eee"})
 	.to($('#source text'),.2,{fill:vrLtBlue})
 	.set(connectionCircle,{autoAlpha:1,stroke:vrLtBlue,strokeDasharray:"10 10",onComplete:function(){
 		$('#source text tspan').html('connecting...')
@@ -418,28 +423,60 @@ tl
 	// make connection success:
 	.to(connectionCircle,.2,{autoAlpha:1,stroke:vrGreen,strokeDasharray:"none"})
 	.to($('#source text'),.2,{autoAlpha:0})
-
 	.to(connectionCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
-		//showNextMsg()
 		$('#audioElement').trigger('play');
 		console.log('should be playing audio')
 		TweenMax.set(connectionMeter,{stroke:vrGreen,autoAlpha:.5})
-		renderChart($('#circles g#source'))
+		renderChart("#source")
 	}})
-	.set(broadcastBtn,{className:"-=hide"})
-	.to(broadcastCircle,.5,{autoAlpha: 1, stroke:vrYellow},"+=5")
-	.set(broadcastBtn,{className:"-=success"})
-	.set(broadcastBtn,{className:"+=warning",onComplete:showAdvice})
-	.set(broadcastBtn,{className:"+=pulse"})
+	.to(broadcastBtn,.2,{autoAlpha:1,onComplete:function(){
+		$('#stream text tspan').html('start')
+	}})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:"white"})
+	//.to(broadcastCircle,.5,{autoAlpha: 1, stroke:vrYellow},"+=5")
+	//.set(broadcastBtn,{className:"-=success"})
+	.set(broadcastBtn,{className:"+=pulse",onComplete:showAdvice})
+	//.set(broadcastBtn,{className:"+=pulse"})
 	.addPause()
-	.to(broadcastCircle,.2,{stroke:vrGreen})
+	//make it sstream!
+	.to($('#stream text'),.2,{autoAlpha:0})
+	.to($('#stream .base'),.2,{stroke:vrGreen})
+	.set($('#stream .overlay'),{drawSVG:"0%",transformOrigin: "50% 50%",stroke:"rgba(0,0,0,.3)",rotation:-90})
 	.to(broadcastCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
 		//show advice here?
 		TweenMax.set(broadcastMeter,{stroke:vrGreen,autoAlpha:.5})
 		renderChart("#stream")
 		TweenMax.to(broadcastBtn,.2,{autoAlpha:0})
 		showAdvice()
-	}});
+	}})
+	//unite them
+	.set(connectionCheck,{autoAlpha:0})
+	.set(connectionMeter,{autoAlpha:0})
+	.to($('#stream .bg'),.2,{autoAlpha:1,fill:"#eee",strokeWidth:15, stroke: "#eee"})
+	.to($('#stream'),1,{x:"-90%",ease:Power2.easeOut})
+	.to($('#stream .overlay'),10,{drawSVG:"5%"})
+	//make it lose connection
+
+	.to($('#source .overlay'),.2,{stroke:neutralColor,onComplete:function(){
+			$('#audioElement').trigger('pause');
+			hideAdvice()
+			$('#stream text tspan').html('dead air')
+	}})
+	.set(connectionCircle,{autoAlpha:1,strokeDashoffset:0,stroke:vrLtBlue,strokeDasharray:"10 10",onComplete:function(){
+		$('#source text tspan').html('searching...')
+	}})
+
+	.to($('#source text'),.2,{autoAlpha:1,fill:vrLtBlue})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:neutralColor})
+	.set(broadcastCheck,{autoAlpha:0})
+	.set(connectionCheck,{autoAlpha:0})
+	.set(broadcastMeter,{autoAlpha:0})
+	.set(connectionMeter,{autoAlpha:0})
+	.set($('#stream .base'),{stroke:neutralColor})
+	.to($('#stream'),.5,{x:"0%",ease:Power2.easeOut,onComplete:showAdvice})
+	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:50})
+
+	;
 
 	$(document).ready(function(){
 		$('.svg-circle').attr("class", "svg-circle");
