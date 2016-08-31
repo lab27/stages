@@ -319,7 +319,7 @@ var showSpotlight = function(o) {
 	//console.log('showing spotlight ' + curSl + " of " + totalSl)
 	var btnText = "Next"
 	var cancelBtnText = "Skip tour"
-	////console.log("object: " + JSON.stringify(o).innerHTML)
+	//console.log("object: " + JSON.stringify(o).innerHTML)
 	o.width=o.diameter;
 	o.height=o.diameter;
 	o.marginLeft = (-1*(o.diameter/2))
@@ -328,7 +328,7 @@ var showSpotlight = function(o) {
 	o.left = o.thing.offset().left + (o.thing.outerWidth()/2)
 	msg = o.msg
 	o.onComplete = function(){
-		TweenMax.set(slmb,{marginTop: 24, marginLeft: 24})
+		// TweenMax.set(slmb,{left: "50%",top:"50%", marginLeft: slmb.outerWidth()/2, marginTop: slmb.outerHeight()/2})
 
 		$('#spotlight-msg #msg').html(msg)
 		if (curSl == totalSl) {
@@ -342,7 +342,7 @@ var showSpotlight = function(o) {
 
 	}
 	TweenMax.to($("#spotlight"),.2,o);
-	TweenMax.to(spotlightMsg,.2,{top: o.top,left: o.left})
+	TweenMax.to(slmb,.2,{left: "50%",top:"50%", marginLeft: -1*(slmb.outerWidth()/2), marginTop: -1*(slmb.outerHeight()/2)})
 }
 
 var nextSpotlight = function(){
