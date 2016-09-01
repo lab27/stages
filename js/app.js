@@ -3,6 +3,7 @@ var pauseBtn = document.getElementsByClassName("pause");
 var startBtn = $('#logo');
 var panelSize = $('.panelbox').outerWidth();
 var serverCirclePos = $('#server-circle-svg').offset()
+var btnBbox = $("#stream .button")[0].getBBox();
 var listOpen = false
 var helpOpen = false
 var adviceCount = -1;
@@ -382,7 +383,7 @@ $('.cancel-btn').on('click',function(){
 
 });
 
-$('#server text tspan').html('launch server')
+$('#server text tspan').html('launch')
 
 //TweenMax.staggerTo(panelCircle,1,{scaleX: 1, scaleY: 1, autoAlpha:1, ease: Power2.easeOut},.2)
 //TweenMax.set(circles,{strokeWidth:0,autoAlpha:0})
@@ -433,6 +434,7 @@ tl
 		TweenMax.set(connectionMeter,{stroke:vrGreen,autoAlpha:.5})
 		renderChart("#source")
 	}})
+	.to(connectionCheck,.2,{drawSVG:"100% 100%",ease:Power2.easeOut})
 	.to(broadcastBtn,.2,{autoAlpha:1,onComplete:function(){
 		$('#stream text tspan').html('start')
 	}})
@@ -457,19 +459,28 @@ tl
 	.set(connectionCheck,{autoAlpha:0})
 	.set(connectionMeter,{autoAlpha:0})
 	.to($('#stream .bg'),.2,{autoAlpha:1,fill:"#eee",strokeWidth:15, stroke: "#eee"})
-	.to($('#stream'),1,{x:"-90%",ease:Power2.easeOut})
-	//make the stop button
-	.to(broadcastCheck,.2,{autoAlpha:0})
-	.set($('#stream .button'),{className:"-=pulse",transformOrigin: "50% 50%"})
-	.set($('#stream .button'),{scaleX:.4})
-	.set($('#stream .button'),{scaleY:.4})
-	.to($('#stream .button'),.2,{autoAlpha:1,fill:vrRed, onComplete:function(){
+	.to($('#stream'),1,{x:"-90%",ease:Power2.easeOut,onComplete:function(){
 		$('#stream text tspan').html('stop')
 	}})
-	.to($('#stream text'),.2,{autoAlpha:1,fill:"white"})
+	//make the stop button
+	// .to(broadcastCheck,.2,{autoAlpha:0,onComplete:function(){
+	// 	//btnBbox = $('#stream .button')[0].getBBox()
+	// }})
+	// .to($('#stream .button'),.2,{
+	// 	className:"-=pulse",
+	// 	transformOrigin: "50% 50%",
+	// })
+	// .set($('#stream .button'),{scaleX:.4})
+	// .set($('#stream .button'),{scaleY:.4})
+	// .to($('#stream .button'),.2,{autoAlpha:1,fill:vrRed,transformOrigin: "50% 50%",
+	// 	onComplete:function(){
+	// 	$('#stream text tspan').html('stop')
+	// }})
+	.to(broadcastCheck,.2,{autoAlpha:0})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:vrRed,fontWeight:700})
 	.to($('#stream .overlay'),10,{drawSVG:"5%"})
 	//make it lose connection
-	.to($('#stream .button'),.2,{autoAlpha:0})
+	//.to($('#stream .button'),.2,{autoAlpha:0})
 	.to($('#source .overlay'),.2,{stroke:neutralColor,onComplete:function(){
 			$('#audioElement').trigger('pause');
 			hideAdvice()
@@ -480,14 +491,14 @@ tl
 	}})
 
 	.to($('#source text'),.2,{autoAlpha:1,fill:vrLtBlue})
-	.to($('#stream text'),.2,{autoAlpha:1,fill:neutralColor})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:neutralColor,fontWeight:300})
 	.set(broadcastCheck,{autoAlpha:0})
 	.set(connectionCheck,{autoAlpha:0})
 	.set(broadcastMeter,{autoAlpha:0})
 	.set(connectionMeter,{autoAlpha:0})
 	.set($('#stream .base'),{stroke:neutralColor})
 	.to($('#stream'),.5,{x:"0%",ease:Power2.easeOut,onComplete:showAdvice})
-	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:50})
+	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:-50})
 	//make it reconnect
 	.to($('#source .overlay'),.2,{strokeDasharray:"none",stroke:vrGreen})
 	.to($('#stream text'),.2,{autoAlpha:0})
@@ -512,11 +523,13 @@ tl
 	.to($('#stream .base'),.2,{stroke:vrGreen})
 	.set(connectionCheck,{autoAlpha:0})
 	.set(connectionMeter,{autoAlpha:0})
-	.to($('#stream'),1,{x:"-90%",ease:Power2.easeOut})
+	//.to($('#stream .button'),.2,{autoAlpha:1})
+	//back together
+	.to($('#stream'),.3,{x:"-90%",ease:Power2.easeOut})
 		.to(broadcastCheck,.2,{autoAlpha:0})
-	.set($('#stream .button'),{className:"-=pulse"})
-	.to($('#stream .button'),.2,{autoAlpha:1})
-	.to($('#stream text'),.2,{autoAlpha:1,fill:"white"})
+	//.set($('#stream .button'),{className:"-=pulse"})
+	//.to($('#stream .button'),.2,{autoAlpha:1})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:vrRed,fontWeight:700})
 	.to($('#stream .overlay'),10,{drawSVG:"15%"})
 	;
 
