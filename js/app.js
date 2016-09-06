@@ -203,7 +203,7 @@ $('#server .button').on('click',function(){
 })
 
 //launch device selector 
-$('#source .button').on('click',function(){
+$('#circleButton').on('click',function(){
 	TweenMax.to($(this),.2,{autoAlpha:0})
 	if(adviceShowing==true){
 		hideAdvice()
@@ -314,7 +314,7 @@ dstl.to(devices,.5,{autoAlpha:1})
 	.addPause()
 	.to(devices,.3,{y:"-150%",ease:Power2.easeOut, onComplete:function(){
 		console.log('closed the device selector')
-		tl.play()
+		ringsTL.play()
 	}});
 }
 
@@ -432,7 +432,7 @@ tl
 		$('#audioElement').trigger('play');
 		console.log('should be playing audio')
 		TweenMax.set(connectionMeter,{stroke:vrGreen,autoAlpha:.5})
-		renderChart("#source")
+		renderChart("#meter")
 	}})
 	.to(connectionCheck,.2,{drawSVG:"100% 100%",ease:Power2.easeOut})
 	.to(broadcastBtn,.2,{autoAlpha:1,onComplete:function(){

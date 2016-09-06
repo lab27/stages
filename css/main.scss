@@ -62,8 +62,19 @@ h4.section-title {
     height: 40vw;
     // margin: 12px 5vw 24px 5vw;
     }
+
+    svg text {
+        
+        font-size:12px;
+        text-transform:uppercase;
+        letter-spacing:1px;
+        pointer-events:none;
+    }
 }
 
+#meter {
+    stroke: rgba($talk-dark,.2)
+}
 .base {
     stroke: rgba($topbar-dark,.1);
 }
@@ -260,6 +271,16 @@ input:checked ~ .switch-paddle {
     }
 }
 
+@keyframes connecting {
+    from {
+        stroke-width:10;
+    }
+
+    to {
+        stroke-width:5;
+    }
+}
+
 hr {
     border-color: $vr-beige;
 }
@@ -267,6 +288,13 @@ hr {
 .pulse {
     animation-duration: 1s;
     animation-name: pulse;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.connecting {
+    animation-duration: .5s;
+    animation-name: connecting;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
