@@ -21,6 +21,73 @@ $neutralColor: $charcoal;
     font-style: normal;
 }
 
+.no-pad {
+    padding:0;
+}
+h4.section-title {
+    font-size: rem-calc(16);
+    font-family:$body-font-family;
+    font-weight:300;
+    color: rgba($topbar-dark,.5);
+    letter-spacing:rem-calc(2);
+    text-transform:uppercase;
+}
+
+#left-side {
+    background: #eee; 
+    height:auto;
+    padding-bottom:24px;
+    min-height: 100vh;
+}
+#toggles {
+    padding: 12px;
+}
+#circles {
+    width:90vw;
+    height: 90vw;
+
+    margin: 0 auto;
+    margin-bottom:24px;
+    // background:rgba(lemonchiffon,.2);
+    @include breakpoint(medium){
+        width:45vw;
+        height: 45vw;
+            max-width:50vh;
+    max-height:50vh;
+        // margin: 12px 2.5vw 24px 2.5vw;
+    }
+
+    @include breakpoint(large){
+        width:40vw;
+    height: 40vw;
+    // margin: 12px 5vw 24px 5vw;
+    }
+}
+
+.base {
+    stroke: rgba($topbar-dark,.1);
+}
+
+#speakers {
+    text-align:left;
+    a {
+        color: $talk-dark;
+        padding: 6px 0;
+        &:hover  {
+            color: $vr-light-blue;
+        }
+        svg {
+            fill:currentColor;
+            width:21px;
+            height:21px;
+        }
+        .speaker-name {
+            vertical-align: -webkit-baseline-middle;
+            margin-left: 6px;
+            letter-spacing:rem-calc(1)
+        }
+    }
+}
 
 svg {
     fill: currentColor;
@@ -213,7 +280,7 @@ hr {
 
     @include box-shadow(3px, 0.3);
 
-    max-height: 72px;
+    max-height: 80px;
     position: relative;
     z-index: 900;
     color: $topbar-dark;
@@ -251,7 +318,7 @@ hr {
 #talkbar {
     background: #f9f9f9;
     border-bottom: 1px solid #ddd;
-    position: absolute;
+    position: relative;
     z-index: 800;
     height: 60px;
     overflow: hidden;
@@ -364,18 +431,15 @@ hr {
 }
 
 #controls {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding-top: 140px;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    // background:yellow;
+    // min-height: 100vh;
+    // margin-top:90px;
+}
+
+#chat-window {
+    background:orange;
+    min-height:100vh;
+    margin-top:90px;
 }
 
 #panels {

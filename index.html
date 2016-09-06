@@ -7,33 +7,19 @@ talk: Teaching An Old Dog New Tricks
 {% include navbar.html %}
 {% include talkbar.html %}
 {% include help.html %}
-<div id="controls">
-<div id="panels">
-	{% include circles.svg %}
+
+<div class="row clearfix expanded">
+<div class="medium-6 columns float-left" style="background: orange; min-height: 100vh;">left</div>
+<div class="medium-6 columns float-right" style="background: yellow; min-height: 100vh;">right</div>
+
 </div>
-<div id="advice-messages-holder">
-	<!-- <div id="advice-messages-bg" style="visibility: hidden; opacity: 0;"></div> -->
-	<div id="advice-message-box" style="visibility: hidden; opacity: 0;">
-		<button id="close-advice"><span>&times;</span></button>
-		<p>Advice</p>
-	</div>
-</div>
-<div class="row clearfix" id="playbar">
-	<div class="small-6 columns"></div>
-	<div class="small-6 columns text-center clearfix switch-holder">
-		{% include switch.html name="autoplay" %}
-	</div>
-</div>
-</div>
-<div id="spotlight"></div>
-<div id="spotlight-msg" class="" style="opacity:0">
+
+<!-- <div id="spotlight"></div> -->
+<!-- <div id="spotlight-msg" class="" style="opacity:0">
 <p id="msg" class="float-left clearfix">Want to take a tour of the control panel?</p>
 <p class="clearfix"><a href="#" class="button success cancel-btn float-left">No Thanks</a>
 <a href="#" class="button success spotlight-btn float-right">Let's Go!</a></p>
-</div>
-<!-- <div class="row" id="msg-center"> -->
-<!-- {% for post in site.data.messages %}
-{% include messagebox.html %}
-{% endfor %} -->
+</div> -->
+
 </div>
 {% include devices.html %}
