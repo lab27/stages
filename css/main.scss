@@ -302,6 +302,9 @@ hr {
 #devices {
     text-align: center;
     background: $vr-purple;
+    a {
+        color: white;
+    }
 
     @include box-shadow(20px, 0.3);
 
