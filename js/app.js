@@ -253,12 +253,14 @@ $('#list-toggle a').on('click', function(){
 	//open the list
 	TweenMax.to(listBox,.3,{height:"auto",ease:Power2.easeOut,onComplete:function(){
 		listOpen = true
+		$('.see-all').html("hide")
 	}})
 	} else {
 		//close the list
 	console.log("what is talkbar height still: " + talkbarHeight)
 	TweenMax.to(listBox,.3,{height:talkbarHeight,ease:Power2.easeOut,onComplete:function(){
 		listOpen = false
+		$('.see-all').html("see all")
 	}})
 	}
 })
@@ -320,7 +322,7 @@ dstl.to(devices,.5,{autoAlpha:1})
 	.set($('#screen2'),{className:'-=hide'})
 	.to($('#screen2'),.3,{x:"0%",ease:Power2.easeOut})
 	.addPause()
-	.to(devices,.3,{y:"-150%",ease:Power2.easeOut, onComplete:function(){
+	.to(devices,.3,{y:"-350%",ease:Power2.easeOut, onComplete:function(){
 		console.log('closed the device selector')
 		ringsTL.play()
 	}});

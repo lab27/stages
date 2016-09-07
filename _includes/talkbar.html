@@ -19,17 +19,45 @@
 	</div>
 
 	<div class="row clearfix" id="listrow">
-		<div class="small-12 columns talkitem header">
-			<p class="header"><span class="time">Date / Time</span>
-			<span class="title">Title</span>
-			
+
+<!-- TODAY -->
+	<div class="small-12 columns dayitem clearfix">
+			<p class="">TODAY
 		</p>
 	</div>
-	{% for talk in site.data.talks %}
-		<div class="small-12 columns talkitem">
-			<p><span class="time">{{talk.time}}</span>
-			<span class="title">{{talk.title}}</span>
-			
+	{% for talk in site.data.talks limit:5 %}
+		<div class="small-12 columns talkitem clearfix">
+			<p class="clearfix">
+			<span class="title float-left text-left">{{talk.title}}</span>
+			<span class="time float-right text-right">{{talk.time}}</span>
+		</p>
+	</div>
+{% endfor %}
+
+<!-- TOMORROW -->
+	<div class="small-12 columns dayitem clearfix">
+			<p class="">TOMORROW
+		</p>
+	</div>
+	{% for talk in site.data.talks offset:5 limit:5 %}
+		<div class="small-12 columns talkitem clearfix">
+			<p class="clearfix">
+			<span class="title float-left text-left">{{talk.title}}</span>
+			<span class="time float-right text-right">{{talk.time}}</span>
+		</p>
+	</div>
+{% endfor %}
+
+<!-- oct 3 -->
+	<div class="small-12 columns dayitem clearfix">
+			<p class="">OCTOBER 3
+		</p>
+	</div>
+	{% for talk in site.data.talks offset: 10 limit:5 %}
+		<div class="small-12 columns talkitem clearfix">
+			<p class="clearfix">
+			<span class="title float-left text-left">{{talk.title}}</span>
+			<span class="time float-right text-right">{{talk.time}}</span>
 		</p>
 	</div>
 {% endfor %}
