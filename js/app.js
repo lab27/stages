@@ -8,6 +8,7 @@ var listOpen = false
 var helpOpen = false
 var adviceCount = -1;
 var adviceShowing = false
+var talkbarHeight;
 //Spotlight
 var sl = [{thing: $('#venue-title'), diameter: 300, msg:"This is the name of your stage."},
 		{thing: $('#back-arrow'), diameter: 150, msg: "See all your stages."},
@@ -150,6 +151,7 @@ $(window).on('resize', function(){
 	//console.log('resize windw')
 	panelSize = $('.panelbox').outerWidth();
 	console.log('panelSize: '+panelSize)
+	$('#talkbar').removeAttr( "style" )
 
 });
 
@@ -242,14 +244,20 @@ var listToggle = new TimelineMax(tmax_options),
 //listToggle.fromTo(listBox,.3,{height: "100vh"},{height:"60px"})
 
 $('#list-toggle').on('click', function(){
+	
 	if (listOpen == false) {
+	//store height:
+	talkbarHeight = $('#talkbar').outerHeight()+"px"
+	talkbarHeight=talkbarHeight.toString()
+	console.log('outerheight of talkbar: '+ talkbarHeight)
 	//open the list
 	TweenMax.to(listBox,.3,{height:"auto",ease:Power2.easeOut,onComplete:function(){
 		listOpen = true
 	}})
 	} else {
 		//close the list
-	TweenMax.to(listBox,.3,{height:"60px",ease:Power2.easeOut,onComplete:function(){
+	console.log("what is talkbar height still: " + talkbarHeight)
+	TweenMax.to(listBox,.3,{height:talkbarHeight,ease:Power2.easeOut,onComplete:function(){
 		listOpen = false
 	}})
 	}

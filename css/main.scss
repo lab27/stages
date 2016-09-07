@@ -1,6 +1,5 @@
 ---
 ---
-
 @import "settings";
 @import "foundation";
 
@@ -22,80 +21,91 @@ $neutralColor: $charcoal;
 }
 
 .no-pad {
-    padding:0;
+    padding: 0;
 }
+
 h4.section-title {
     font-size: rem-calc(16);
-    font-family:$body-font-family;
-    font-weight:300;
-    color: rgba($topbar-dark,.5);
-    letter-spacing:rem-calc(2);
-    text-transform:uppercase;
+    font-family: $body-font-family;
+    font-weight: 300;
+    color: rgba($topbar-dark, 0.5);
+    letter-spacing: rem-calc(2);
+    text-transform: uppercase;
 }
 
 #left-side {
-    background: #eee; 
-    height:auto;
-    padding-bottom:24px;
+    background: #eee;
+    height: auto;
+    padding-bottom: 24px;
     min-height: 100vh;
 }
+
 #toggles {
     padding: 12px;
 }
-#circles {
-    width:90vw;
-    height: 90vw;
 
+#circles {
+    width: 90vw;
+    height: 90vw;
     margin: 0 auto;
-    margin-bottom:24px;
+    margin-bottom: 24px;
+
     // background:rgba(lemonchiffon,.2);
-    @include breakpoint(medium){
-        width:45vw;
+    @include breakpoint(medium) {
+        width: 45vw;
         height: 45vw;
-            max-width:50vh;
-    max-height:50vh;
+        max-width: 50vh;
+        max-height: 50vh;
+
         // margin: 12px 2.5vw 24px 2.5vw;
     }
 
-    @include breakpoint(large){
-        width:40vw;
-    height: 40vw;
-    // margin: 12px 5vw 24px 5vw;
+
+    @include breakpoint(large) {
+        width: 40vw;
+        height: 40vw;
+
+        // margin: 12px 5vw 24px 5vw;
     }
 
+
     svg text {
-        
-        font-size:8px;
-        text-transform:uppercase;
-        letter-spacing:1px;
-        pointer-events:none;
+        font-size: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        pointer-events: none;
     }
 }
 
 #meter {
-    stroke: rgba($talk-dark,.2)
+    stroke: rgba($talk-dark, 0.2);
 }
+
 .base {
-    stroke: rgba($topbar-dark,.1);
+    stroke: rgba($topbar-dark, 0.1);
 }
 
 #speakers {
-    text-align:left;
+    text-align: left;
+
     a {
         color: $talk-dark;
         padding: 6px 0;
-        &:hover  {
+
+        &:hover {
             color: $vr-light-blue;
         }
+
         svg {
-            fill:currentColor;
-            width:21px;
-            height:21px;
+            fill: currentColor;
+            width: 21px;
+            height: 21px;
         }
+
         .speaker-name {
             vertical-align: -webkit-baseline-middle;
             margin-left: 6px;
-            letter-spacing:rem-calc(1)
+            letter-spacing: rem-calc(1);
         }
     }
 }
@@ -107,6 +117,7 @@ svg {
 @mixin box-shadow($blur, $opacity) {
     box-shadow: 0 1px $blur rgba($almost-black, $opacity);
 }
+
 #helpbar {
     margin: 0;
     padding: 24px;
@@ -126,33 +137,36 @@ svg {
         margin: 0 auto;
         text-align: left;
         color: $talk-dark;
+
         p {
             color: $topbar-dark;
         }
     }
 }
-    #close-help, #close-advice {
-        width: 44px;
+
+#close-help, #close-advice {
+    width: 44px;
     height: 44px;
     background: white;
     font-size: 44px;
     border-radius: 22px;
-    box-shadow: 0 1px 2px rgba(18,18,20,0.3);
+    box-shadow: 0 1px 2px rgba(18, 18, 20, 0.3);
     font-weight: 200;
     padding: 0;
     position: absolute;
     right: 24px;
     top: 24px;
+
     span {
         margin-top: -6px;
-    display: block;
-    margin-left: 2px;
-    font-size: 50px;
+        display: block;
+        margin-left: 2px;
+        font-size: 50px;
     }
-    }
+}
 
-    #close-advice {
-        top: 1px;
+#close-advice {
+    top: 1px;
     right: 12px;
     background: none;
     box-shadow: none;
@@ -161,7 +175,7 @@ svg {
     height: 24px;
     font-weight: 200;
     color: $topbar-dark;
-    }
+}
 
 //playbar
 #playbar {
@@ -172,7 +186,7 @@ svg {
     bottom: 0;
     max-width: none;
     height: 60px;
-    box-shadow: 0 -1px 3px rgba($talk-dark, .3);
+    box-shadow: 0 -1px 3px rgba($talk-dark, 0.3);
 }
 
 .switch-holder {
@@ -182,24 +196,24 @@ svg {
 .switch-paddle {
     background: $neutralColor;
     border-radius: 16px;
+
     &:after {
         border-radius: 50%;
     }
 }
 
 input:checked ~ .switch-paddle {
-    background: $success-color
+    background: $success-color;
 }
 
 .switch-label {
     color: $neutralColor;
     font-weight: 300;
     text-transform: uppercase;
-    margin:0;
+    margin: 0;
     padding-top: 3px;
     padding-right: 12px;
 }
-
 
 #darkout {
     display: block;
@@ -233,7 +247,7 @@ input:checked ~ .switch-paddle {
     border-radius: 4px;
 
     @include box-shadow(5px, 0.3);
-    
+
     margin-top: 24px;
     margin-left: 24px;
 
@@ -241,6 +255,7 @@ input:checked ~ .switch-paddle {
         margin: 0;
         color: $talk-dark;
     }
+
     #msg {
         padding-bottom: 12px;
         margin-bottom: 12px;
@@ -253,7 +268,7 @@ input:checked ~ .switch-paddle {
     }
 
     .cancel-btn {
-        margin:0;
+        margin: 0;
         background: none;
         color: $talk-dark;
         font-weight: 300;
@@ -273,11 +288,11 @@ input:checked ~ .switch-paddle {
 
 @keyframes connecting {
     from {
-        stroke-width:10;
+        stroke-width: 10;
     }
 
     to {
-        stroke-width:5;
+        stroke-width: 5;
     }
 }
 
@@ -305,21 +320,22 @@ hr {
 
 #navbar {
     background: $topbar-dark;
-    height:48px;
+    height: 48px;
     color: $vr-light-blue;
+
     @include box-shadow(3px, 0.3);
 
     max-height: 80px;
     position: relative;
     z-index: 900;
-    display:flex;
-   
+    display: flex;
 }
 
 #back-arrow, #dropdown, #list-toggle {
     a {
         color: $oil;
-        font-size: 24px;
+        font-size: .8rem;
+        display: flex;
 
         &:hover {
             color: $vr-light-blue;
@@ -331,33 +347,75 @@ hr {
     svg {
         width: 18px;
         height: 18px;
+        margin-right: 6px;
     }
 }
 
 #back-arrow {
-    padding:5px 0 0 12px;
+    //padding:5px 0 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 #dropdown {
-    padding:11px 11px 0 0;
+    padding: 11px 11px 0 0;
 }
 
 #list-toggle {
-    padding: 14px 24px;
+    background: #555;
+    color: #ddd;
+    padding: 6px 14px;
+    border-bottom: 1px solid $charcoal;
+    height: 30px;
+
+    .see-all {
+        font-size: 0.6rem;
+        text-align: center;
+        padding: 0;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+
     a {
-        color: $neutralColor
+        color: $neutralColor;
+    }
+
+    @include breakpoint(medium) {
+        padding: 9px 14px;
+        background:$silver;
+        height:48px;
     }
 }
 
+
 #talkbar {
     background: #f9f9f9;
-    border-bottom: 1px solid #ddd;
+    //border-bottom: 1px solid #ddd;
     position: relative;
     z-index: 800;
-    height: 60px;
+    height: 100px;
     overflow: hidden;
     width: 100%;
     margin-top: 0px;
+
+    @include box-shadow(1px, 0.3);
+
+    @include breakpoint(medium) {
+        height: 36px;
+        border-bottom: 1px solid $charcoal;
+    }
+
+
+    a {
+        color: $jet;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 #titlerow {
@@ -378,8 +436,6 @@ hr {
         margin: 0;
     }
 }
-
-
 
 #dropdown .avatar {
     width: 24px;
@@ -403,6 +459,7 @@ hr {
 #devices {
     text-align: center;
     background: $vr-purple;
+
     a {
         color: white;
     }
@@ -471,9 +528,9 @@ hr {
 }
 
 #chat-window {
-    background:orange;
-    min-height:100vh;
-    margin-top:90px;
+    background: orange;
+    min-height: 100vh;
+    margin-top: 90px;
 }
 
 #panels {
@@ -484,7 +541,7 @@ hr {
 
 #advice-messages-bg {
     position: absolute;
-    background: rgba($talk-dark, .8);
+    background: rgba($talk-dark, 0.8);
     top: 0;
     bottom: 0;
     left: 0;
@@ -492,21 +549,22 @@ hr {
 }
 
 #advice-message-box {
-        position: absolute;
+    position: absolute;
     background: $vr-yellow;
     padding: 12px;
     border-radius: 4px;
-    @include box-shadow(5px, .3);
+
+    @include box-shadow(5px, 0.3);
+
     p {
-    color: $topbar-dark;
-    font-weight: 300;
-    max-width: 75%;
-    margin: 0;
-    float:left;
-    min-width: 150px;
+        color: $topbar-dark;
+        font-weight: 300;
+        max-width: 75%;
+        margin: 0;
+        float: left;
+        min-width: 150px;
     }
 }
-
 
 #msg-center {
     padding: 0;
@@ -658,7 +716,7 @@ html, body {
 
     text {
         stroke: none;
-        fill:$talk-dark;
+        fill: $talk-dark;
         font-size: 10px;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -677,12 +735,6 @@ html, body {
     position: relative;
 }
 
-
-
-
-
-
-
 .start-btn {
     width: 90%;
     height: 90%;
@@ -696,7 +748,6 @@ html, body {
 }
 
 #titlebar {
-
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -724,8 +775,8 @@ html, body {
         text-transform: uppercase;
         letter-spacing: rem-calc(1);
         font-family: $header-font-family;
-        margin-bottom:0;
-        line-height:.8rem;
+        margin-bottom: 0;
+        line-height: .8rem;
     }
 
     .talk-label {
@@ -735,6 +786,11 @@ html, body {
     }
 }
 
+.next-talk, .time-info {
+    font-weight: 200;
+    color: #666;
+}
+
 #talk-titlebar {
     padding: 18px 24px 0 0;
 
@@ -742,30 +798,40 @@ html, body {
         color: $oil;
     }
 
-    .next-talk, .time-info {
-        font-weight: 200;
-        color: $charcoal;
-    }
-
     a {
         color: $oil;
-        &:hover 
-        { text-decoration: underline 
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 }
-    #help-link {
-        padding: 14px;
-        .button {
-            border-radius: 50%;
-            color: $talk-dark;
-            background: $vr-yellow;
-            width: 28px;
-            height: 28px;
-            padding: 5px 9px;
-    font-weight: 500;
-        }
+
+#current, #next {
+    height: 36px;
+    border-bottom: 1px solid $charcoal;
+    background: #bbb;
+    padding: 8px 12px;
+    font-size: .8rem;
+}
+
+#current {
+    background: #ccc;
+}
+
+#help-link {
+    // padding: 14px;
+    .button {
+        border-radius: 50%;
+        color: $talk-dark;
+        background: $vr-yellow;
+        width: 25px;
+        height: 25px;
+        padding: 5px 8px;
+        font-weight: 500;
     }
+}
+
 .talkitem {
     p {
         color: $oil;
