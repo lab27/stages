@@ -304,19 +304,21 @@ hr {
 }
 
 #navbar {
-    background: #fff;
-
+    background: $topbar-dark;
+    height:48px;
+    color: $vr-light-blue;
     @include box-shadow(3px, 0.3);
 
     max-height: 80px;
     position: relative;
     z-index: 900;
-    color: $topbar-dark;
+    display:flex;
+   
 }
 
 #back-arrow, #dropdown, #list-toggle {
     a {
-        color: $topbar-dark;
+        color: $oil;
         font-size: 24px;
 
         &:hover {
@@ -324,16 +326,20 @@ hr {
         }
     }
 
-    padding: 20px 24px;
+    // padding: 20px 24px;
 
     svg {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
     }
 }
 
+#back-arrow {
+    padding:5px 0 0 12px;
+}
+
 #dropdown {
-    padding-top: 18px;
+    padding:11px 11px 0 0;
 }
 
 #list-toggle {
@@ -376,8 +382,8 @@ hr {
 
 
 #dropdown .avatar {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: url(../assets/tubes.png) no-repeat 50% 50%;
     background-size: cover;
@@ -690,8 +696,11 @@ html, body {
 }
 
 #titlebar {
-    padding-top: 21px;
-    height: 72px;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 
     /* margin-bottom: 60px;*/
     .label {
@@ -708,13 +717,15 @@ html, body {
         margin-bottom: 0;
     }
 
-    p#venue-title {
-        color: $topbar-dark;
+    #venue-title {
+        color: $silver;
         font-weight: normal;
-        font-size: 1.25rem;
+        font-size: .8rem;
         text-transform: uppercase;
-        letter-spacing: rem-calc(2);
+        letter-spacing: rem-calc(1);
         font-family: $header-font-family;
+        margin-bottom:0;
+        line-height:.8rem;
     }
 
     .talk-label {
