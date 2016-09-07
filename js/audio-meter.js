@@ -15,16 +15,15 @@
     // var frequencyData = new Uint8Array(analyser.frequencyBinCount);
     var frequencyData = new Uint8Array(16);
 
-    // var myRadius = $("#meter").getOuterWidth()/2
+
     var svgHeight = 200,
         svgWidth = 200;
 
     //var svg = d3.select('#connection-circle-svg')
 
     // continuously loop and update chart with frequency data.
-    function renderChart(el,radius2) {
-        //console.log("My element: "+ el + ", or my element: " + $(el))
-        console.log('radius2: '+radius2)
+    function renderChart(el) {
+        console.log("My element: "+ el + ", or my element: " + $(el))
         var svg = d3.select(el)
         requestAnimationFrame(function(){renderChart(el)});
 
@@ -59,7 +58,7 @@
 
         circles
             .attr({
-                r: radius2,
+                r: function(d) { return radiusScale(d); },
 
                 //cx: svgWidth / 2,
                 //cy: svgHeight / 2,

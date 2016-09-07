@@ -95,11 +95,11 @@ ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
 //connecting
 .to(buttonText,.2,{autoAlpha:1,fill:vrLtBlue})
 .to(sourceBase,.2,{stroke:vrLtBlue,strokeDasharray:"4 8",className:"+=connecting"})
-//connected
+//connected (add meter)
 .to(sourceBase,.2,{stroke:vrGreen,strokeDasharray:"0 0",onComplete:function(){
 	buttonText.html('connected')
 	$('#audioElement').trigger('play');
-	var sourceOverlay = svgContainer.append("circle")
+	var sourceOverlay = svgContainer.insert("rect")
 	.attr("cx", "50%")
 	.attr("cy", "50%")
 	//.attr("fill", "none")
@@ -107,7 +107,14 @@ ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
 	//.attr("r", radius2)
 	.attr("id","meter")
 	.attr("class","overlay");
-	renderChart("#meter",radius2)
+	renderChart("#meter")
 }},"+=2")
 .set(sourceBase,{className:"-=connecting"})
 .to(buttonText,.2,{fill:vrGreen})
+//show stream button
+.to(buttonText,.2,{fill:"white"})
+.to(button,.2,{autoAlpha:1,attr:{r:radius3-spacing-strokeWidth-strokeWidth},onComplete:function(){
+	buttonText.html("stream")
+}})
+.addPause()
+
