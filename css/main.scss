@@ -25,7 +25,7 @@ $neutralColor: $charcoal;
 }
 
 h4.section-title {
-    font-size: rem-calc(16);
+    font-size: rem-calc(14);
     font-family: $body-font-family;
     font-weight: 300;
     color: rgba($topbar-dark, 0.5);
@@ -45,8 +45,8 @@ h4.section-title {
 }
 
 #circles {
-    width: 90vw;
-    height: 90vw;
+    width: 50vw;
+    height: 50vw;
     margin: 0 auto;
     margin-bottom: 24px;
 
@@ -89,17 +89,25 @@ h4.section-title {
     text-align: left;
 
     a {
-        color: $talk-dark;
-        padding: 6px 0;
+        color: $topbar-dark;
+        padding: 6px;
+
+    
+    background: #f4f4f4;
+    margin: 3px 2px;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    font-size: .7rem;
 
         &:hover {
-            color: $vr-light-blue;
+            background:#fff;
+            
         }
 
         svg {
             fill: currentColor;
-            width: 21px;
-            height: 21px;
+            width: 18px;
+            height: 18px;
         }
 
         .speaker-name {
@@ -108,6 +116,8 @@ h4.section-title {
             letter-spacing: rem-calc(1);
         }
     }
+.menu>li {
+display: inline-block; }
 }
 
 svg {
@@ -369,12 +379,15 @@ hr {
     border-bottom: 1px solid $charcoal;
     height: 30px;
 
-    .see-all {
+    a.see-all {
         font-size: 0.6rem;
         text-align: center;
         padding: 0;
         text-transform: uppercase;
         font-weight: 600;
+        justify-content:center;
+        color: $ghost;
+
     }
 
 
@@ -385,10 +398,30 @@ hr {
     @include breakpoint(medium) {
         padding: 9px 14px;
         background:$silver;
-        height:48px;
+        height:36px;
     }
 }
 
+#toggles .button {
+    border:none;
+    margin: 0;
+    &:hover {
+        background:none;
+        color: $success-color;
+    }
+    svg {
+        margin-right:6px;
+
+
+    }
+            &:last-child {
+                svg {
+
+            margin-right:0;
+            margin-left:6px;
+                }
+        }
+}
 
 #talkbar {
     background: #f9f9f9;

@@ -243,7 +243,7 @@ var listToggle = new TimelineMax(tmax_options),
 
 //listToggle.fromTo(listBox,.3,{height: "100vh"},{height:"60px"})
 
-$('#list-toggle').on('click', function(){
+$('#list-toggle a').on('click', function(){
 	
 	if (listOpen == false) {
 	//store height:
