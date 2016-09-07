@@ -21,6 +21,84 @@ $neutralColor: $charcoal;
     font-style: normal;
 }
 
+.no-pad {
+    padding:0;
+}
+h4.section-title {
+    font-size: rem-calc(16);
+    font-family:$body-font-family;
+    font-weight:300;
+    color: rgba($topbar-dark,.5);
+    letter-spacing:rem-calc(2);
+    text-transform:uppercase;
+}
+
+#left-side {
+    background: #eee; 
+    height:auto;
+    padding-bottom:24px;
+    min-height: 100vh;
+}
+#toggles {
+    padding: 12px;
+}
+#circles {
+    width:90vw;
+    height: 90vw;
+
+    margin: 0 auto;
+    margin-bottom:24px;
+    // background:rgba(lemonchiffon,.2);
+    @include breakpoint(medium){
+        width:45vw;
+        height: 45vw;
+            max-width:50vh;
+    max-height:50vh;
+        // margin: 12px 2.5vw 24px 2.5vw;
+    }
+
+    @include breakpoint(large){
+        width:40vw;
+    height: 40vw;
+    // margin: 12px 5vw 24px 5vw;
+    }
+
+    svg text {
+        
+        font-size:8px;
+        text-transform:uppercase;
+        letter-spacing:1px;
+        pointer-events:none;
+    }
+}
+
+#meter {
+    stroke: rgba($talk-dark,.2)
+}
+.base {
+    stroke: rgba($topbar-dark,.1);
+}
+
+#speakers {
+    text-align:left;
+    a {
+        color: $talk-dark;
+        padding: 6px 0;
+        &:hover  {
+            color: $vr-light-blue;
+        }
+        svg {
+            fill:currentColor;
+            width:21px;
+            height:21px;
+        }
+        .speaker-name {
+            vertical-align: -webkit-baseline-middle;
+            margin-left: 6px;
+            letter-spacing:rem-calc(1)
+        }
+    }
+}
 
 svg {
     fill: currentColor;
@@ -193,6 +271,16 @@ input:checked ~ .switch-paddle {
     }
 }
 
+@keyframes connecting {
+    from {
+        stroke-width:10;
+    }
+
+    to {
+        stroke-width:5;
+    }
+}
+
 hr {
     border-color: $vr-beige;
 }
@@ -204,24 +292,33 @@ hr {
     animation-direction: alternate;
 }
 
+.connecting {
+    animation-duration: .5s;
+    animation-name: connecting;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 .callout {
     margin: 6px;
 }
 
 #navbar {
-    background: #fff;
-
+    background: $topbar-dark;
+    height:48px;
+    color: $vr-light-blue;
     @include box-shadow(3px, 0.3);
 
-    max-height: 72px;
+    max-height: 80px;
     position: relative;
     z-index: 900;
-    color: $topbar-dark;
+    display:flex;
+   
 }
 
 #back-arrow, #dropdown, #list-toggle {
     a {
-        color: $topbar-dark;
+        color: $oil;
         font-size: 24px;
 
         &:hover {
@@ -229,16 +326,20 @@ hr {
         }
     }
 
-    padding: 20px 24px;
+    // padding: 20px 24px;
 
     svg {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
     }
 }
 
+#back-arrow {
+    padding:5px 0 0 12px;
+}
+
 #dropdown {
-    padding-top: 18px;
+    padding:11px 11px 0 0;
 }
 
 #list-toggle {
@@ -251,7 +352,7 @@ hr {
 #talkbar {
     background: #f9f9f9;
     border-bottom: 1px solid #ddd;
-    position: absolute;
+    position: relative;
     z-index: 800;
     height: 60px;
     overflow: hidden;
@@ -281,8 +382,8 @@ hr {
 
 
 #dropdown .avatar {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: url(../assets/tubes.png) no-repeat 50% 50%;
     background-size: cover;
@@ -302,6 +403,9 @@ hr {
 #devices {
     text-align: center;
     background: $vr-purple;
+    a {
+        color: white;
+    }
 
     @include box-shadow(20px, 0.3);
 
@@ -361,18 +465,15 @@ hr {
 }
 
 #controls {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding-top: 140px;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    // background:yellow;
+    // min-height: 100vh;
+    // margin-top:90px;
+}
+
+#chat-window {
+    background:orange;
+    min-height:100vh;
+    margin-top:90px;
 }
 
 #panels {
@@ -504,7 +605,7 @@ html, body {
 /*   stroke-width: 6px;*/
 /* }*/
 
-.panelbox {
+#panels {
     position: relative;
 
     /* border: 1px dotted $oil;*/
@@ -535,17 +636,33 @@ html, body {
         stroke: $neutralColor;
     }
 
-    path#overlay {
+    path.overlay {
         stroke: rgba($almost-black, 0);
+        transform-origin: 50%;
+    }
+
+    path.button {
+        stroke-width: 0;
+        fill: $success-color;
+        transform-origin: 50%;
     }
 
     line {
         stroke: $bgColor;
     }
 
-    path#hub {
+    path.hub {
         stroke: none;
         fill: $bgColor;
+    }
+
+    text {
+        stroke: none;
+        fill:$talk-dark;
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        pointer-events: none;
     }
 
     .base-ring {
@@ -560,58 +677,11 @@ html, body {
     position: relative;
 }
 
-#server-circle-holder {
-    position: relative;
 
-    #server-circle {
-        position: absolute;
-        border: none;
-        padding: 0;
 
-        svg {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-        }
-    }
-}
 
-.panel-circle-holder {
-    width: 100%;
-    height: 100%;
-    display: block;
 
-    /* border-radius: 80px;*/
-    /* border: 6px solid rgba(black, .3);*/
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0 auto;
-    transition: border .2s ease;
-    position: relative;
 
-    &.success {
-        border: 6px solid #3adb76;
-    }
-
-    svg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform: rotate(-90deg);
-
-        &.neutral-circle path {
-            stroke: rgba(black, 0.4);
-        }
-    }
-}
-
-#broadcast-circle {
-    padding: 0;
-}
-
-#server-circle {
-    svg {}
-}
 
 .start-btn {
     width: 90%;
@@ -626,8 +696,11 @@ html, body {
 }
 
 #titlebar {
-    padding-top: 21px;
-    height: 72px;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 
     /* margin-bottom: 60px;*/
     .label {
@@ -644,13 +717,15 @@ html, body {
         margin-bottom: 0;
     }
 
-    p#venue-title {
-        color: $topbar-dark;
+    #venue-title {
+        color: $silver;
         font-weight: normal;
-        font-size: 1.25rem;
+        font-size: .8rem;
         text-transform: uppercase;
-        letter-spacing: rem-calc(2);
+        letter-spacing: rem-calc(1);
         font-family: $header-font-family;
+        margin-bottom:0;
+        line-height:.8rem;
     }
 
     .talk-label {
