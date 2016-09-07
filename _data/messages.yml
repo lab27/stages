@@ -1,10 +1,27 @@
-- title: Welcome, Nick!
-- title: Fire it up!
-- title: Good job!
-- title: Excellent!
-- title: Connected!
-- title: Starting soon!
+- title: Your server is starting.
+  side: left
+  time: "10:20"
+- title: Your server is ready.
+  side: left
+  time: "10:22"
+- title: Please select a streaming source.
+  side: left
+  time: "10:23"
+- title: Your StreamBoxx is connected!
+  side: left
+  time: "10:24"
+- title: You may start the stream anytime.
+  side: left
+  time: "10:25"
 - title: You're On The Air!
-- title: Overdue
-- title: You're On The Air!
-- title: Ending soon?
+  side: left
+  time: "10:26"
+- title: Oops! We lost you.
+  side: left
+  time: "10:27"
+- title: We're back on the air!
+  side: left
+  time: "10:28"
+- title: Sorry about that folks, had a technical problem.
+  side: right
+  time: "10:29"

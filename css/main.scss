@@ -373,7 +373,7 @@ hr {
 }
 
 #list-toggle {
-    background: #555;
+    background: #ddd;
     color: #ddd;
     padding: 6px 14px;
     border-bottom: 1px solid $charcoal;
@@ -386,7 +386,7 @@ hr {
         text-transform: uppercase;
         font-weight: 600;
         justify-content:center;
-        color: $ghost;
+        color: $oil;
 
     }
 
@@ -425,7 +425,6 @@ hr {
 
 #talkbar {
     background: #f9f9f9;
-    //border-bottom: 1px solid #ddd;
     position: relative;
     z-index: 800;
     height: 100px;
@@ -433,11 +432,11 @@ hr {
     width: 100%;
     margin-top: 0px;
 
-    @include box-shadow(1px, 0.3);
+    @include box-shadow(3px, 0.3);
 
     @include breakpoint(medium) {
         height: 36px;
-        border-bottom: 1px solid $charcoal;
+        // border-bottom: 1px solid $charcoal;
     }
 
 
@@ -451,6 +450,15 @@ hr {
     }
 }
 
+.dayitem {
+    height:24px;
+    background:$oil;
+    color:$silver;
+    font-size:.8rem;
+        padding: 2px 0 0 12px;
+
+}
+
 #titlerow {
     height: 60px;
     border-bottom: 1px solid $steel;
@@ -462,7 +470,8 @@ hr {
 }
 
 .talkitem {
-    padding: 6px 24px;
+    font-size: .8rem;
+    padding: 6px;
     border-bottom: 1px solid $charcoal;
 
     p {
@@ -843,13 +852,13 @@ html, body {
 #current, #next {
     height: 36px;
     border-bottom: 1px solid $charcoal;
-    background: #bbb;
+    background: #ccc;
     padding: 8px 12px;
     font-size: .8rem;
 }
 
 #current {
-    background: #ccc;
+    background: #bbb;
 }
 
 #help-link {
@@ -872,12 +881,12 @@ html, body {
         .time {
             font-weight: 200;
             color: $charcoal;
-            min-width: 160px;
+            // min-width: 160px;
             display: inline-block;
         }
 
         .title {
-            padding-left: 12px;
+            padding-left: 6px;
         }
 
         &.header {
@@ -891,5 +900,59 @@ html, body {
 
     &.header {
         border-color: #bbb;
+    }
+}
+
+
+//messages
+#message-container {
+    padding: 12px 6px;
+    background: #f4f4f4;
+    min-height: 100vh;
+.message-row {
+    margin: 0;
+}
+}
+
+.message-losenge {
+    background:$vr-beige;
+    margin:6px;
+    @include box-shadow(3px, .3);
+    border-radius: 4px;
+    padding: 6px;
+    font-size: .9rem;
+    color: #333;
+    padding-bottom: 21px;
+    max-width: 60%;
+    position:relative;
+    &.right {
+        background:white;
+
+    }
+    .message-time {
+        position: absolute;
+    bottom: 3px;
+    right: 6px;
+    font-size: .7rem;
+    color: #999;
+    }
+}
+
+#chat-input {
+    background: #fff;
+    color: $oil;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 50%;
+    height: 50px;
+    box-shadow:0 -1px 3px rgba($talk-dark,.3);
+    #chat-icon,#chat-send {
+        padding: 12px;
+        svg {
+            width:24px;
+            height:24px;
+
+        }
     }
 }

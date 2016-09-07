@@ -1,0 +1,25 @@
+<div class="medium-6 columns float-right" id="message-container">
+	<h4 class="section-title text-center">Messages</h4>
+	{% for message in site.data.messages reversed %}
+		<div class="row message-row">
+			<div class="message-losenge {{message.side}} float-{{message.side}}">
+				<span class="message-text">{{ message.title }}</span>
+				<span class="message-time">{{ message.time }}</span>
+			</div>
+		</div>
+	{% endfor %}
+	<div id="chat-input" class="clearfix">
+		<div class="small-1 columns" id="chat-icon">{% include svg_icon.svg name='chat'%}</div>
+		<div class="small-10 columns" id="chat-input-field">
+			<form>
+    <div class="medium-12 columns">
+      <label>
+        <input type="text" placeholder="enter text here">
+      </label>
+    </div>
+ 
+</form>
+		</div>
+		<div class="small-1 columns float-right" id="chat-send">send</div>
+	</div>
+</div>
