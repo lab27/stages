@@ -99,7 +99,7 @@ ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
 .to(sourceBase,.2,{stroke:vrGreen,strokeDasharray:"0 0",onComplete:function(){
 	buttonText.html('connected')
 	$('#audioElement').trigger('play');
-	var sourceOverlay = svgContainer.insert("rect")
+	var sourceOverlay = svgContainer.insert("circle")
 	.attr("cx", "50%")
 	.attr("cy", "50%")
 	//.attr("fill", "none")

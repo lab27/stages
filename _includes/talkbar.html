@@ -1,13 +1,23 @@
-<div class="row expanded" id="talkbar" style="height: 60px">
-	<div class="row clearfix" id="titlerow">
-		<div class="small-1 columns" id="list-toggle">
-			<a href="#">{% include svg_icon.svg name='list'%}</a>
-		</div>
-		<div class="small-10 columns" id="talk-titlebar">
-			<p id="current-talk-title"><span class="next-talk">NEXT TALK: </span><a href="#">Gorgeous Metal Steering Wheel</a> <span class="time-info">(starts in one day)</span></p>
-		</div>
-		<div class="small-1 columns" id="help-link"><a href="#" class="float-right button">?</a></div>
+<div class="row expanded" id="talkbar">
+	<div class="medium-6 columns" id="current">
+		<p id="current-talk-title">
+			<span class="next-talk">Now: </span>
+			<a href="#">Gorgeous Metal Steering Wheel</a>
+			<span class="float-right time-info">00:12</span>
+		</p>
 	</div>
+	<div class="medium-5  columns" id="next">
+		<p id="current-talk-title">
+			<span class="next-talk">Next: </span>
+			<a href="#">Stream A Little Stream of Me</a>
+			<span class="float-right time-info">(14:30)</span>
+		</p>
+	</div>
+	<div class="medium-1 columns" id="list-toggle">
+		<a href="#" class="float-right hide-for-small-only">{% include svg_icon.svg name='list'%}</a>
+		<p class="see-all show-for-small-only">see all</p>
+	</div>
+
 	<div class="row clearfix" id="listrow">
 		<div class="small-12 columns talkitem header">
 			<p class="header"><span class="time">Date / Time</span>
