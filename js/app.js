@@ -70,6 +70,39 @@ var tmax_options = {
   onRepeatParams: []
 };
 
+//chat submit 
+$('#chat-form').submit(function(event){
+	console.log('submitted the form!!')
+	event.preventDefault();
+	//append the element with text from the input field
+	var myMsg = $('#chat-form input').val()
+	var myMsgSpan = $("<span/>", {class:"message-text"}).html(myMsg)
+	var myTimeSpan = $("<span/>", {class:"message-time"}).html("10:30")
+	var myLosenge = $("<div/>", {
+    	class : "message-losenge right float-right"
+  	}).append(myMsgSpan).append(myTimeSpan);
+	var newChat = $("<div/>", {
+    	class : "row message-row"
+    	
+  	}).append(myLosenge).insertAfter($('#message-container h4'));
+	// $('#message-container h4').after(
+	// 	'<div class="row message-row">'+
+	// 	'<div class="message-losenge right float-right">'+
+	// 			'<span class="message-text">'+ $("#chat-form input").val() + '</span>'+
+	// 			'<span class="message-time">10:29</span>'+
+	// 		'</div>'
+	// 	);
+	//animate it in:
+	TweenMax.set(newChat,{autoAlpha:0,display:"none", transformOrigin: "50% 50%", marginTop:"-50px",scaleX:1.2,scaleY:1.2})
+	TweenMax.to(newChat,.5,{autoAlpha:1, display: "block", scaleX:1, scaleY:1, marginTop:0, ease:Bounce.easeOut})
+	//clear the input field
+	$("#chat-form input").val('')
+})
+
+$('#chat-send').on('click',function(){
+	$('#chat-form').submit()
+})
+
 //advice message timeline
 var adviceMessageTL = new TimelineMax(tmax_options)
 
@@ -312,6 +345,8 @@ var launchDeviceSelector = function(){
 
 TweenMax.set(deviceSelectorLi,{className:"-=hide"})
 TweenMax.set(devices,{className:"-=hide"})
+TweenMax.set($('#first-message'),{position:"relative",left:0,bottom:0})
+TweenMax.set($('#first-message .message-losenge'),{background:vrBeige})
 
 dstl.to(devices,.5,{autoAlpha:1})
 	.staggerTo(deviceSelectorLi,.5,{autoAlpha:1,paddingTop:0},.2)
@@ -543,7 +578,11 @@ tl
 	.to($('#stream .overlay'),10,{drawSVG:"15%"})
 	;
 
+
+		TweenMax.set($('#first-message'),{autoAlpha:0,display:"none",scaleX:1.2,scaleY:1.2})
+
 	$(document).ready(function(){
+		TweenMax.to($('#first-message'),.5,{autoAlpha:1, display: "block", scaleX:1, scaleY:1, ease:Bounce.easeOut, delay:2})
 		$('.svg-circle').attr("class", "svg-circle");
 		tl.play()
 		hideAdvice()

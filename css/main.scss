@@ -346,7 +346,7 @@ hr {
 
 #back-arrow, #dropdown, #list-toggle {
     a {
-        color: $oil;
+        color: $charcoal;
         font-size: .8rem;
         display: flex;
 
@@ -375,12 +375,65 @@ hr {
     padding: 11px 11px 0 0;
 }
 
+
+#toggles .button {
+    border:none;
+    margin: 0;
+    &:hover {
+        background:none;
+        color: $success-color;
+    }
+    svg {
+        margin-right:6px;
+
+
+    }
+            &:last-child {
+                svg {
+
+            margin-right:0;
+            margin-left:6px;
+                }
+        }
+}
+
+#talkbar {
+    background: #f9f9f9;
+    position: relative;
+    z-index: 800;
+    height: 100px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 0px;
+
+    @include box-shadow(3px, 0.3);
+
+    @include breakpoint(medium) {
+        height: 36px;
+        // border-bottom: 1px solid $charcoal;
+    }
+
+
+    a {
+        color: white;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 #list-toggle {
     background: rgba($topbar-dark,.2);
     color: #ddd;
     padding: 6px 14px;
-    border-bottom: 1px solid $charcoal;
+    // border-bottom: 1px solid $charcoal;
     height: 30px;
+
+    a {
+        color: $oil;
+    }
 
     a.see-all {
         font-size: 0.6rem;
@@ -437,53 +490,6 @@ hr {
     }
 }
 
-#toggles .button {
-    border:none;
-    margin: 0;
-    &:hover {
-        background:none;
-        color: $success-color;
-    }
-    svg {
-        margin-right:6px;
-
-
-    }
-            &:last-child {
-                svg {
-
-            margin-right:0;
-            margin-left:6px;
-                }
-        }
-}
-
-#talkbar {
-    background: #f9f9f9;
-    position: relative;
-    z-index: 800;
-    height: 100px;
-    overflow: hidden;
-    width: 100%;
-    margin-top: 0px;
-
-    @include box-shadow(3px, 0.3);
-
-    @include breakpoint(medium) {
-        height: 36px;
-        // border-bottom: 1px solid $charcoal;
-    }
-
-
-    a {
-        color: $jet;
-        font-weight: 500;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-}
 
 .dayitem {
     height:24px;
@@ -520,7 +526,7 @@ hr {
     border-radius: 50%;
     background: url(../assets/tubes.png) no-repeat 50% 50%;
     background-size: cover;
-    border: 1px solid white;
+    border: 1px solid $charcoal;
 
     @include box-shadow(2px, 0.3);
 
@@ -888,7 +894,7 @@ html, body {
 
 .next-talk, .time-info {
     font-weight: 200;
-    color: #666;
+    color: #eee;
 }
 
 #talk-titlebar {
@@ -899,7 +905,7 @@ html, body {
     }
 
     a {
-        color: $oil;
+        color: $white;
 
         &:hover {
             text-decoration: underline;
@@ -909,7 +915,7 @@ html, body {
 
 #current, #next {
     height: 36px;
-    border-bottom: 1px solid $charcoal;
+    // border-bottom: 1px solid $charcoal;
     background: rgba($topbar-dark,.3);
     padding: 8px 12px;
     font-size: .8rem;
@@ -967,6 +973,10 @@ html, body {
     padding: 12px 6px;
     background: #f8f8f8;
     min-height: 100vh;
+    padding-bottom:10px;
+    @include breakpoint(medium){
+        padding-bottom:60px;
+    }
 .message-row {
     margin: 0;
 }
@@ -1010,6 +1020,12 @@ html, body {
         .strong {
             text-decoration:underline;
         }
+    }
+
+    @include breakpoint(medium){
+        position:relative;
+        bottom:0;
+        left:0;
     }
 }
 
