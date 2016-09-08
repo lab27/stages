@@ -7,7 +7,8 @@ var radius3 = (svgWidth/2)-(strokeWidth*2)-(strokeWidth/2)-(spacing*2);
 
 var svgContainer = d3.select("#circles").append("svg")
                                     .attr("viewBox", "0 0 " + svgWidth + " " + svgWidth);
-                                  
+        
+var buttonClickCounter = 0;                                  
 
 //server base
 var serverBase = svgContainer.append("circle")
@@ -66,11 +67,20 @@ var buttonText = svgContainer.append("text")
 
 //click events
 button.on("click", function() {
-  launchDeviceSelector()
-  TweenMax.set(button,{autoAlpha:0})
-  TweenMax.set(buttonText,{autoAlpha:0})
-  buttonText.html("connecting...")
+	if (buttonClickCounter == 0){
+
+	  launchDeviceSelector()
+	  TweenMax.set(button,{autoAlpha:0})
+	  TweenMax.set(buttonText,{autoAlpha:0})
+	  buttonText.html("connecting...")
+	  buttonClickCounter ++
+	} else if (buttonClickCounter == 1){
+		ringsTL.play()
+		buttonClickCounter ++
+	}
 });
+
+
 
 //set initial states:
 TweenMax.set(serverOverlay,{rotation:-90,transformOrigin: "50% 50%",drawSVG:"0%",stroke:vrLtBlue})
@@ -113,8 +123,34 @@ ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
 .to(buttonText,.2,{fill:vrGreen})
 //show stream button
 .to(buttonText,.2,{fill:"white"})
-.to(button,.2,{autoAlpha:1,attr:{r:radius3-spacing-strokeWidth-strokeWidth},onComplete:function(){
+.to(button,.2,{className:"=+stream",autoAlpha:1,attr:{r:radius3-spacing-strokeWidth-strokeWidth},onComplete:function(){
 	buttonText.html("stream")
 }})
 .addPause()
-
+.to(streamBase,.2,{stroke:vrGreen})
+.to(button,.2,{autoAlpha:0,onComplete:function(){
+	var stopButton = svgContainer.insert("rect")
+	.attr("rx", "2")
+	.attr("ry", "2")
+	.attr("width","15")
+	.attr("height","15")
+	.attr("x",100-7.5)
+	.attr("y",110)
+	.attr("fill",vrRed)
+	.attr("id","stopButton");
+	(function() {
+     var counter = 0,
+     cDisplay = document.getElementById("buttonText");
+     format = function(t) {
+         var minutes = Math.floor(t/600),
+             seconds = Math.floor( (t/10) % 60);
+         minutes = (minutes < 10) ? "0" + minutes.toString() : minutes.toString();
+         seconds = (seconds < 10) ? "0" + seconds.toString() : seconds.toString();
+         cDisplay.innerHTML = minutes + ":" + seconds;
+     };
+    setInterval(function() {
+       counter++;
+       format(counter);
+    },100);
+})();
+}})

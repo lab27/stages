@@ -7,6 +7,15 @@
     analyser.fftSize = 32
     console.log(analyser.fftSize)
 
+    d3.selection.prototype.moveToBack = function() {  
+        return this.each(function() { 
+            var firstChild = this.parentNode.firstChild; 
+            if (firstChild) { 
+                this.parentNode.insertBefore(this, firstChild); 
+            } 
+        });
+    };
+
     // bind our analyser to the media element source.
     audioSrc.connect(analyser);
     audioSrc.connect(audioCtx.destination);
@@ -54,7 +63,7 @@
        var circles = svg
            .data([volume]);
 
-        circles.enter().append('circle');
+        circles.enter().insert('circle','circle.base:first-child');
 
         circles
             .attr({
@@ -70,7 +79,7 @@
                 //'stroke-dasharray': volume/10,
                 //'stroke-dashoffset':volume,
                 //stroke: "none"
-           });
+           }).style("pointer-events","none").moveToBack();
 
         circles.exit().remove(); 
     }
