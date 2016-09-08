@@ -3,10 +3,12 @@ var pauseBtn = document.getElementsByClassName("pause");
 var startBtn = $('#logo');
 var panelSize = $('.panelbox').outerWidth();
 var serverCirclePos = $('#server-circle-svg').offset()
+//var btnBbox = $("#stream .button")[0].getBBox();
 var listOpen = false
 var helpOpen = false
 var adviceCount = -1;
 var adviceShowing = false
+var talkbarHeight;
 //Spotlight
 var sl = [{thing: $('#venue-title'), diameter: 300, msg:"This is the name of your stage."},
 		{thing: $('#back-arrow'), diameter: 150, msg: "See all your stages."},
@@ -23,14 +25,16 @@ var adviceMessages = [
 	{message: "Good news! Your server can be started."},
 	{message: "Excellent! Your server is up and running. Now it's time to choose how you'll stream."},
 	{message: "Heads up! Your talk is scheduled to start soon."},
-	{message: "You're on the air!"}]
+	{message: "You're on the air!"},
+	{message: "Oops! We lost you.   "},
+	{message: "Aaaaand, we're back.  "}]
 
 	//TL max:
 var tmax_options = {
   delay: 0,
   paused: false,
   onComplete: function() {
-    //console.log('animation is complete');
+    console.log('animation is complete');
   },
   onCompleteScope: {},
   tweens: [],
@@ -38,20 +42,20 @@ var tmax_options = {
   align: 'normal',
   useFrames: false,
   onStart: function() {
-    //console.log('on start called');
+    console.log('on start called');
     showNextMsg();
   },
   onStartScope: {},
   onUpdate: function() {
-    //console.log('on update called');
+    console.log('on update called');
   },
   onUpdateScope: {},
   onRepeat: function() {
-    //console.log('on repeat called');
+    console.log('on repeat called');
   },
   onRepeatScope: {},
   onReverseComplete: function() {
-    //console.log('on reverse complete');
+    console.log('on reverse complete');
   },
   onReverseCompleteScope: {},
   autoRemoveChildren: false,
@@ -66,26 +70,59 @@ var tmax_options = {
   onRepeatParams: []
 };
 
+//chat submit 
+$('#chat-form').submit(function(event){
+	console.log('submitted the form!!')
+	event.preventDefault();
+	//append the element with text from the input field
+	var myMsg = $('#chat-form input').val()
+	var myMsgSpan = $("<span/>", {class:"message-text"}).html(myMsg)
+	var myTimeSpan = $("<span/>", {class:"message-time"}).html("10:30")
+	var myLosenge = $("<div/>", {
+    	class : "message-losenge right float-right"
+  	}).append(myMsgSpan).append(myTimeSpan);
+	var newChat = $("<div/>", {
+    	class : "row message-row"
+    	
+  	}).append(myLosenge).insertAfter($('#message-container h4'));
+	// $('#message-container h4').after(
+	// 	'<div class="row message-row">'+
+	// 	'<div class="message-losenge right float-right">'+
+	// 			'<span class="message-text">'+ $("#chat-form input").val() + '</span>'+
+	// 			'<span class="message-time">10:29</span>'+
+	// 		'</div>'
+	// 	);
+	//animate it in:
+	TweenMax.set(newChat,{autoAlpha:0,display:"none", transformOrigin: "50% 50%", marginTop:"-50px",scaleX:1.2,scaleY:1.2})
+	TweenMax.to(newChat,.5,{autoAlpha:1, display: "block", scaleX:1, scaleY:1, marginTop:0, ease:Bounce.easeOut})
+	//clear the input field
+	$("#chat-form input").val('')
+})
+
+$('#chat-send').on('click',function(){
+	$('#chat-form').submit()
+})
+
 //advice message timeline
 var adviceMessageTL = new TimelineMax(tmax_options)
 
 
 var hideAdvice = function(){
-	//console.log("hide advice")
+	console.log("hide advice")
 	//move it away
 	TweenMax.to($('#advice-message-box'),.2,{autoAlpha: 0, top:-200,left:"50%",ease:Power2.easeOut, onComplete:function(){
 		
 		adviceCount ++
 		adviceShowing=false
 		TweenMax.to($('#advice-messages-bg'),.2,{autoAlpha:0})
-		//console.log("new msg: " + adviceMessages[adviceCount].message)
+		console.log("new msg: " + adviceMessages[adviceCount].message)
 		$('#advice-message-box p').html(adviceMessages[adviceCount].message)
 	}})
 };
 
 var showAdvice = function(){
-	//console.log("show advice")
-	//console.log("counter: " + adviceCount)
+	console.log("show advice")
+	console.log("counter: " + adviceCount)
 	//load the message
 	//$('#advice-message-box p').html(adviceMessages[num].message)
 	//load positions
@@ -118,7 +155,7 @@ $('.stream-switch').removeClass('hide')
 var slmb = $('#spotlight-msg')
 var slmbMT = -1*($('#spotlight-msg').outerHeight()/2)
 var slmbML = -1*($('#spotlight-msg').outerWidth()/2)
-//console.log('outerWidth: '+ slmbML)
+console.log('outerWidth: '+ slmbML)
 TweenMax.set(slmb,{left:"50%", top: "50%", marginTop: slmbMT, marginLeft: slmbML})
 TweenMax.to(slmb,1,{opacity:1})
 //TweenMax.to($('#spotlight-msg'),.2
@@ -131,6 +168,7 @@ var vrBlue 		= "#2c46b0",
 	vrYellow 	= "#ffed00",
 	vrPurple 	= "#a339cd",
 	vrBeige 	= "#fef1de";
+	neutralColor=	"#b4b6be";
 
 $(startBtn).on('click',function(){
 	$('#audioElement').trigger('play');
@@ -143,9 +181,10 @@ $(startBtn).on('click',function(){
 
 
 $(window).on('resize', function(){
-	////console.log('resize windw')
+	//console.log('resize windw')
 	panelSize = $('.panelbox').outerWidth();
-	//console.log('panelSize: '+panelSize)
+	console.log('panelSize: '+panelSize)
+	$('#talkbar').removeAttr( "style" )
 
 });
 
@@ -159,13 +198,13 @@ var nextMsg = 1;
 
 //show the next msg
 var showNextMsg = function() {
-	//console.log("show next message called")
-	////console.log("next msg: " + nextMsg.attr('id'))
+	console.log("show next message called")
+	//console.log("next msg: " + nextMsg.attr('id'))
 
 
 	var targetMsgBox = $('#messagebox'+currentMsg)
 	var nextMsgBox = $('#messagebox'+nextMsg)
-	//console.log("target: " + targetMsgBox.attr('id'))
+	console.log("target: " + targetMsgBox.attr('id'))
 	$(nextMsgBox).removeClass('hide')
 	//tl.play()
 	TweenMax.to(targetMsgBox,.5,{autoAlpha:0,ease:Power2.easeOut, onComplete:function(){
@@ -184,14 +223,14 @@ $('.avatar').on('click',function(){
 	}
 	$('#server-button').removeClass('hide').addClass('pulse')
 	showAdvice()
-	// showNextMsg()
+	tl.play()
 
 });
 
 
 
 //start server
-$('#server-button').on('click',function(){
+$('#server .button').on('click',function(){
 	TweenMax.to($(this),.5,{autoAlpha:0,scaleX:0,scaleY:0,ease:Power2.easeOut})
 	//showNextMsg()
 	hideAdvice()
@@ -199,7 +238,7 @@ $('#server-button').on('click',function(){
 })
 
 //launch device selector 
-$('#source-button').on('click',function(){
+$('#circleButton').on('click',function(){
 	TweenMax.to($(this),.2,{autoAlpha:0})
 	if(adviceShowing==true){
 		hideAdvice()
@@ -215,7 +254,7 @@ $('.box2-select').on('click',function(){
 	dstl.play()
 })
 
-$('#stream-button').on('click',function(){
+$('#stream .button').on('click',function(){
 	tl.play()
 	if(adviceShowing==true){
 		hideAdvice()
@@ -237,16 +276,24 @@ var listToggle = new TimelineMax(tmax_options),
 
 //listToggle.fromTo(listBox,.3,{height: "100vh"},{height:"60px"})
 
-$('#list-toggle').on('click', function(){
+$('#list-toggle a').on('click', function(){
+	
 	if (listOpen == false) {
+	//store height:
+	talkbarHeight = $('#talkbar').outerHeight()+"px"
+	talkbarHeight=talkbarHeight.toString()
+	console.log('outerheight of talkbar: '+ talkbarHeight)
 	//open the list
 	TweenMax.to(listBox,.3,{height:"auto",ease:Power2.easeOut,onComplete:function(){
 		listOpen = true
+		$('.see-all').html("hide").addClass("hide-all")
 	}})
 	} else {
 		//close the list
-	TweenMax.to(listBox,.3,{height:"60px",ease:Power2.easeOut,onComplete:function(){
+	console.log("what is talkbar height still: " + talkbarHeight)
+	TweenMax.to(listBox,.3,{height:talkbarHeight,ease:Power2.easeOut,onComplete:function(){
 		listOpen = false
+		$('.see-all').html("see all").removeClass("hide-all")
 	}})
 	}
 })
@@ -254,25 +301,28 @@ $('#list-toggle').on('click', function(){
 
 $('.list-open').on('click',function(){
 	//close the list
-	//console('close this list!')
+	console('close this list!')
 	TweenMax.to(listBox,.3,{height:"60px",ease:Power2.easeOut})
 })
 
 var tl = new TimelineMax(tmax_options),
-				  serverCircle = $('#server path#overlay'),
+				  circles = $('#circles svg'),
+				  bases = $('#circles .base'),
+				  buttons = $('#circles .button'),
+				  serverCircle = $('#server path.overlay'),
 				  spotlight = $('#spotlight'),
 				  spotlightMsg = $('#spotlight-msg'),
-				  connectionCircle = $('#source path#overlay'),
-				  broadcastCircle = $('#stream path#overlay'),
-				  panelCircle = $('.panelbox svg')
-				  serverCheck = $('#server polyline#check'),
-				  connectionCheck = $('#source polyline#check'),
-				  connectionMeter = $('#source-circle-svg circle'),
-				  broadcastMeter = $('#stream-circle-svg circle'),
-				  broadcastCheck = $('#stream polyline#check'),
-				  serverBtn = $('#server-button'),
-				  connectionBtn = $('#source-button'),
-				  broadcastBtn = $('#stream-button'),
+				  connectionCircle = $('#source path.overlay'),
+				  broadcastCircle = $('#stream path.overlay'),
+				  panelCircle = $('#panels svg')
+				  serverCheck = $('#server polyline.check'),
+				  connectionCheck = $('#source .check'),
+				  connectionMeter = $('#source circle'),
+				  broadcastMeter = $('#stream circle'),
+				  broadcastCheck = $('#stream .check'),
+				  serverBtn = $('#server .button'),
+				  connectionBtn = $('#source .button'),
+				  broadcastBtn = $('#stream .button'),
 				  deviceSelectorLi = $('#devices ul li'),
 				  deviceSelectorUl = $('#devices ul'),
 				  devices = $('#devices'),
@@ -281,12 +331,12 @@ var tl = new TimelineMax(tmax_options),
 				  dstl = new TimelineMax(tmax_options);
 
 
-TweenMax.set(panelCircle,{strokeWidth:0,autoAlpha: 0})
-TweenMax.set(serverCircle,{drawSVG: "0%",transformOrigin: "50% 50%", svgOrigin: "83 83",stroke:vrLtBlue,rotation:-90})
-TweenMax.set($('polyline#check'),{drawSVG: "0%",stroke:vrGreen})
+TweenMax.set(circles,{strokeWidth:5,autoAlpha: 0,fill: "none",stroke:neutralColor })
+TweenMax.set(serverCircle,{drawSVG: "0%",transformOrigin: "50% 50%",stroke:vrLtBlue,rotation:-90})
+TweenMax.set($('polyline.check'),{drawSVG: "0%",stroke:vrGreen})
 TweenMax.set(deviceSelectorLi,{autoAlpha:0,paddingTop:"60px"})
 TweenMax.set(devices,{autoAlpha:0})
-TweenMax.set($('#screen2'),{x:"100%"})
+//TweenMax.set($('#screen2'),{x:"100%"})
 TweenMax.set($('svg circle'),{autoAlpha:0})
 
 
@@ -295,6 +345,9 @@ var launchDeviceSelector = function(){
 
 TweenMax.set(deviceSelectorLi,{className:"-=hide"})
 TweenMax.set(devices,{className:"-=hide"})
+TweenMax.set($('#first-message'),{position:"relative",left:0,bottom:0})
+TweenMax.set($('#first-message .message-losenge'),{background:vrBeige})
+
 dstl.to(devices,.5,{autoAlpha:1})
 	.staggerTo(deviceSelectorLi,.5,{autoAlpha:1,paddingTop:0},.2)
 	.addPause()
@@ -304,8 +357,9 @@ dstl.to(devices,.5,{autoAlpha:1})
 	.set($('#screen2'),{className:'-=hide'})
 	.to($('#screen2'),.3,{x:"0%",ease:Power2.easeOut})
 	.addPause()
-	.to(devices,.3,{y:"-150%",ease:Power2.easeOut, onComplete:function(){
-		tl.play()
+	.to(devices,.3,{y:"-350%",ease:Power2.easeOut, onComplete:function(){
+		console.log('closed the device selector')
+		ringsTL.play()
 	}});
 }
 
@@ -316,10 +370,10 @@ dstl.to(devices,.5,{autoAlpha:1})
 var showSpotlight = function(o) {
 	var curSl = slCounter + 1
 	var totalSl = sl.length 
-	//console.log('showing spotlight ' + curSl + " of " + totalSl)
+	console.log('showing spotlight ' + curSl + " of " + totalSl)
 	var btnText = "Next"
 	var cancelBtnText = "Skip tour"
-	//console.log("object: " + JSON.stringify(o).innerHTML)
+	console.log("object: " + JSON.stringify(o).innerHTML)
 	o.width=o.diameter;
 	o.height=o.diameter;
 	o.marginLeft = (-1*(o.diameter/2))
@@ -347,7 +401,7 @@ var showSpotlight = function(o) {
 
 var nextSpotlight = function(){
 	slCounter ++;
-	// //console.log('slcounter: ' + slCounter + ", sl.length: " + sl.length)
+	// console.log('slcounter: ' + slCounter + ", sl.length: " + sl.length)
 	if (slCounter >= sl.length) {
 		$("#spotlight").addClass('hide')
 		$("#spotlight-msg").addClass('hide')
@@ -371,50 +425,164 @@ $('.cancel-btn').on('click',function(){
 	$("#spotlight").addClass('hide')
 	$("#spotlight-msg").addClass('hide')
 	showAdvice()
+
 });
 
+$('#server text tspan').html('launch')
 
 //TweenMax.staggerTo(panelCircle,1,{scaleX: 1, scaleY: 1, autoAlpha:1, ease: Power2.easeOut},.2)
-
+//TweenMax.set(circles,{strokeWidth:0,autoAlpha:0})
 tl
-	.staggerTo(panelCircle,1,{strokeWidth:5, autoAlpha:1, ease: Power2.easeOut})
+	.staggerTo(circles,1,{strokeWidth:5, autoAlpha:1, ease: Power2.easeOut})
+	.addPause()
+	//show server button 
+	.to($('#server .button'),.2,{autoAlpha:1})
+	.to($('#server text'),.2,{autoAlpha:1,fill: "white"})
 	.addPause()
 	//make the server startup:
-	.to(serverCircle,2,{drawSVG:"100%"})
+	.to($('#server text'),.2,{fill:vrLtBlue,onComplete:function(){
+		$('#server text tspan').html('launching')
+	}})
+	.to(serverCircle,1,{drawSVG:"100%"})
+	.to($('#server text'),.2,{autoAlpha:0})
 	.to(serverCircle,.5,{stroke:vrGreen,onComplete:showAdvice})
-	.to(serverCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
-		showNextMsg()
-		$('#server-button').remove()
-		$('#stopwatch-server').removeClass('hide')
-		startTimer()
+	.to(serverCheck,.2,{drawSVG:"100%", ease: Power2.easeOut})
+	//unite server with source
+	.set($('#source .bg'),{stroke:"#eee",strokeWidth:15,fill:"#eee"})
+	.to($('#source .overlay'),.2,{stroke:"#eee",strokeWidth:5,stroke:neutralColor})
+	.to($('#server'),1,{x:"90%",ease:Power2.easeOut})
+	// .set(serverCircle,{strokeDasharray:"50%",strokeDashoffset:"25%",strokeLinecap:"round"})
+	// .set($('#server .base'),{stroke:"#eee"})
+	// .set($('#server .bg'),{autoAlpha:0})
+	//show button
+	.to(connectionBtn,.2,{autoAlpha:1,onComplete:function(){
+		$('#source text tspan').html('select')
 	}})
-	.set(connectionBtn,{className:'-=hide'})
-	.set(connectionBtn,{className:'+=pulse'})
+	.to($('#source text'),.2,{autoAlpha:1,fill:"white"})
 	.addPause()
+	//make connection progress:
+	.set(serverBtn,{autoAlpha:0})
+	.set(connectionBtn,{autoAlpha:0})
+	.set($('#source .base'),{stroke:"#eee"})
+	.to($('#source text'),.2,{fill:vrLtBlue})
+	.set(connectionCircle,{autoAlpha:1,stroke:vrLtBlue,strokeDasharray:"10 10",onComplete:function(){
+		$('#source text tspan').html('connecting...')
+	}})
+	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:-50})
+		
 	// make connection success:
-	.to(connectionCircle,.2,{autoAlpha:1,stroke:vrGreen})
+	.to(connectionCircle,.2,{autoAlpha:1,stroke:vrGreen,strokeDasharray:"none"})
+	.to($('#source text'),.2,{autoAlpha:0})
 	.to(connectionCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
-		//showNextMsg()
 		$('#audioElement').trigger('play');
+		console.log('should be playing audio')
 		TweenMax.set(connectionMeter,{stroke:vrGreen,autoAlpha:.5})
-		renderChart("#source-circle-svg")
+		renderChart("#meter")
 	}})
-	.set(broadcastBtn,{className:"-=hide"})
-	.to(broadcastCircle,.5,{autoAlpha: 1, stroke:vrYellow},"+=5")
-	.set(broadcastBtn,{className:"-=success"})
-	.set(broadcastBtn,{className:"+=warning",onComplete:showAdvice})
-	.set(broadcastBtn,{className:"+=pulse"})
+	.to(connectionCheck,.2,{drawSVG:"100% 100%",ease:Power2.easeOut})
+	.to(broadcastBtn,.2,{autoAlpha:1,onComplete:function(){
+		$('#stream text tspan').html('start')
+	}})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:"white"})
+	//.to(broadcastCircle,.5,{autoAlpha: 1, stroke:vrYellow},"+=5")
+	//.set(broadcastBtn,{className:"-=success"})
+	.set(broadcastBtn,{className:"+=pulse",onComplete:showAdvice})
+	//.set(broadcastBtn,{className:"+=pulse"})
 	.addPause()
-	.to(broadcastCircle,.2,{stroke:vrGreen})
+	//make it sstream!
+	.to($('#stream text'),.2,{autoAlpha:0})
+	.to($('#stream .base'),.2,{stroke:vrGreen})
+	.set($('#stream .overlay'),{drawSVG:"0%",transformOrigin: "50% 50%",stroke:"rgba(0,0,0,.3)",rotation:-90})
 	.to(broadcastCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
 		//show advice here?
 		TweenMax.set(broadcastMeter,{stroke:vrGreen,autoAlpha:.5})
-		renderChart("#stream-circle-svg")
+		renderChart("#stream")
 		TweenMax.to(broadcastBtn,.2,{autoAlpha:0})
 		showAdvice()
-	}});
+	}})
+	//unite them
+	.set(connectionCheck,{autoAlpha:0})
+	.set(connectionMeter,{autoAlpha:0})
+	.to($('#stream .bg'),.2,{autoAlpha:1,fill:"#eee",strokeWidth:15, stroke: "#eee"})
+	.to($('#stream'),1,{x:"-90%",ease:Power2.easeOut,onComplete:function(){
+		$('#stream text tspan').html('stop')
+	}})
+	//make the stop button
+	// .to(broadcastCheck,.2,{autoAlpha:0,onComplete:function(){
+	// 	//btnBbox = $('#stream .button')[0].getBBox()
+	// }})
+	// .to($('#stream .button'),.2,{
+	// 	className:"-=pulse",
+	// 	transformOrigin: "50% 50%",
+	// })
+	// .set($('#stream .button'),{scaleX:.4})
+	// .set($('#stream .button'),{scaleY:.4})
+	// .to($('#stream .button'),.2,{autoAlpha:1,fill:vrRed,transformOrigin: "50% 50%",
+	// 	onComplete:function(){
+	// 	$('#stream text tspan').html('stop')
+	// }})
+	.to(broadcastCheck,.2,{autoAlpha:0})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:vrRed,fontWeight:700})
+	.to($('#stream .overlay'),10,{drawSVG:"5%"})
+	//make it lose connection
+	//.to($('#stream .button'),.2,{autoAlpha:0})
+	.to($('#source .overlay'),.2,{stroke:neutralColor,onComplete:function(){
+			$('#audioElement').trigger('pause');
+			hideAdvice()
+			$('#stream text tspan').html('dead air')
+	}})
+	.set(connectionCircle,{autoAlpha:1,strokeDashoffset:0,stroke:vrLtBlue,strokeDasharray:"10 10",onComplete:function(){
+		$('#source text tspan').html('searching...')
+	}})
+
+	.to($('#source text'),.2,{autoAlpha:1,fill:vrLtBlue})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:neutralColor,fontWeight:300})
+	.set(broadcastCheck,{autoAlpha:0})
+	.set(connectionCheck,{autoAlpha:0})
+	.set(broadcastMeter,{autoAlpha:0})
+	.set(connectionMeter,{autoAlpha:0})
+	.set($('#stream .base'),{stroke:neutralColor})
+	.to($('#stream'),.5,{x:"0%",ease:Power2.easeOut,onComplete:showAdvice})
+	.to(connectionCircle,5,{autoAlpha:1,stroke:vrLtBlue,strokeDashoffset:-50})
+	//make it reconnect
+	.to($('#source .overlay'),.2,{strokeDasharray:"none",stroke:vrGreen})
+	.to($('#stream text'),.2,{autoAlpha:0})
+	.to($('#stream .base'),.2,{stroke:vrGreen,onComplete:function(){
+		TweenMax.set($('#source text'),{fill:vrGreen})
+		$('#source text tspan').html('CONNECTED')
+	}})
+	.set($('#stream .overlay'),{drawSVG:"0%",transformOrigin: "50% 50%",stroke:"rgba(0,0,0,.3)",rotation:-90})
+	.set(broadcastCheck,{drawSVG:"0%",autoAlpha:1})
+	.to(broadcastCheck,.2,{drawSVG:"100%", ease: Power2.easeOut,onComplete:function(){
+		hideAdvice()
+		$('#audioElement').trigger('play');
+
+		TweenMax.set(broadcastMeter,{stroke:vrGreen,autoAlpha:.5})
+		renderChart("#stream")
+		TweenMax.to(broadcastBtn,.2,{autoAlpha:0})
+		showAdvice()
+	}})
+	.to($('#stream text'),.2,{autoAlpha:0,onComplete:function(){
+		$('#stream text tspan').html('stop')
+	}})
+	.to($('#stream .base'),.2,{stroke:vrGreen})
+	.set(connectionCheck,{autoAlpha:0})
+	.set(connectionMeter,{autoAlpha:0})
+	//.to($('#stream .button'),.2,{autoAlpha:1})
+	//back together
+	.to($('#stream'),.3,{x:"-90%",ease:Power2.easeOut})
+		.to(broadcastCheck,.2,{autoAlpha:0})
+	//.set($('#stream .button'),{className:"-=pulse"})
+	//.to($('#stream .button'),.2,{autoAlpha:1})
+	.to($('#stream text'),.2,{autoAlpha:1,fill:vrRed,fontWeight:700})
+	.to($('#stream .overlay'),10,{drawSVG:"15%"})
+	;
+
+
+		TweenMax.set($('#first-message'),{autoAlpha:0,display:"none",scaleX:1.2,scaleY:1.2})
 
 	$(document).ready(function(){
+		TweenMax.to($('#first-message'),.5,{autoAlpha:1, display: "block", scaleX:1, scaleY:1, ease:Bounce.easeOut, delay:2})
 		$('.svg-circle').attr("class", "svg-circle");
 		tl.play()
 		hideAdvice()

@@ -1,11 +1,12 @@
 <div class="row expanded" id="navbar">
-  <div class="small-1 columns" id="back-arrow">
-    <a href="venues.html">{% include svg_icon.svg name='simple_arrow_left'%}</a>
+  <div class="small-2 medium-3 columns" id="back-arrow">
+    <a href="venues.html">{% include svg_icon.svg name='grid'%} <span class="show-for-medium">STAGES</span></a>
   </div>
-  <div class="small-10 columns text-center" id="titlebar">
-    <p id="venue-title">{{page.title}}</p>
+  <div class="small-8 medium-6 columns text-center" id="titlebar">
+    <div id="venue-title">{{page.title}}</div>
   </div>
-  <div class="small-1 columns text-right" id="dropdown">
+  <div class="small-2 medium-3 columns text-right" id="dropdown">
    <div class="avatar float-right"></div>
+   <!-- <div id="help-link"><a href="#" class="float-right button">?</a></div> -->
   </div>
 </div>

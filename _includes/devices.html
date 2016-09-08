@@ -1,18 +1,25 @@
 <div id="devices" class="hide">
 	<div id="screen1">
+	<div class="back-close clearfix">
+		<div class="float-right close-btn">&times;</div>
+	</div>
 		<h3>How will you stream?</h3>
 		<ul class="menu vertical medium-horizontal text-center">
-			<li class="laptop-select hide"><a href="#">{% include laptop.svg %}</a><br>Laptop</li>
 			<li class="box-select hide"><a href="#">{% include box.svg %}</a><br>VR Box</li>
+			<li class="laptop-select hide"><a href="#">{% include laptop.svg %}</a><br>Laptop</li>
 			<li class="mobile-select hide"><a href="#">{% include mobile.svg %}</a><br>Mobile</li>
 		</ul>
 	</div>
 		<div id="screen2" class="hide">
+		<div class="back-close clearfix">
+		<div class="float-left back-btn">{% include svg_icon.svg name='arrow-left'%}</div>
+		<div class="float-right close-btn">&times;</div>
+	</div>
 		<h3>Which VR Box?</h3>
 		<ul class="menu vertical medium-horizontal text-center">
 			<li class="box1-select hide"><a href="#">{% include box.svg %}</a><br>Nietzsche</li>
 			<li class="box2-select hide"><a href="#">{% include box.svg %}</a><br>Kant</li>
-			<li class="box3-select hide"><a href="#">{% include box.svg %}</a><br>New Box...</li>
+			<li class="box3-select hide"><a href="#" class="new-box">{% include box.svg %}</a><br>New Box...</li>
 		</ul>
 	</div>
 </div>

@@ -1,6 +1,5 @@
 ---
 ---
-
 @import "settings";
 @import "foundation";
 
@@ -21,6 +20,108 @@ $neutralColor: $charcoal;
     font-style: normal;
 }
 
+.no-pad {
+    padding: 0;
+}
+
+h4.section-title {
+    font-size: rem-calc(14);
+    font-family: $body-font-family;
+    font-weight: 300;
+    color: rgba($topbar-dark, 0.5);
+    letter-spacing: rem-calc(2);
+    text-transform: uppercase;
+}
+
+#left-side {
+    background: #eee;
+    height: auto;
+    padding-bottom: 24px;
+    @include breakpoint(medium){
+        float:left;
+    min-height: 100vh;
+    }
+}
+
+#toggles {
+    padding: 12px;
+}
+
+#circles {
+    width: 50vw;
+    height: 50vw;
+    margin: 0 auto;
+    margin-bottom: 24px;
+
+    // background:rgba(lemonchiffon,.2);
+    @include breakpoint(medium) {
+        width: 45vw;
+        height: 45vw;
+        max-width: 50vh;
+        max-height: 50vh;
+
+        // margin: 12px 2.5vw 24px 2.5vw;
+    }
+
+
+    @include breakpoint(large) {
+        width: 40vw;
+        height: 40vw;
+
+        // margin: 12px 5vw 24px 5vw;
+    }
+
+
+    svg text {
+        font-size: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        pointer-events: none;
+    }
+}
+
+#meter {
+    stroke: rgba($talk-dark, 0.2);
+}
+
+.base {
+    stroke: rgba($topbar-dark, 0.1);
+}
+
+#speakers {
+    text-align: left;
+
+    a {
+        color: $topbar-dark;
+        padding: 6px;
+
+    
+    background: #f4f4f4;
+    margin: 3px 2px;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    font-size: .7rem;
+
+        &:hover {
+            background:#fff;
+            
+        }
+
+        svg {
+            fill: currentColor;
+            width: 12px;
+            height: 12px;
+        }
+
+        .speaker-name {
+            vertical-align: baseline;
+            margin-left: 6px;
+            letter-spacing: rem-calc(1);
+        }
+    }
+.menu>li {
+display: inline-block; }
+}
 
 svg {
     fill: currentColor;
@@ -29,6 +130,7 @@ svg {
 @mixin box-shadow($blur, $opacity) {
     box-shadow: 0 1px $blur rgba($almost-black, $opacity);
 }
+
 #helpbar {
     margin: 0;
     padding: 24px;
@@ -48,33 +150,36 @@ svg {
         margin: 0 auto;
         text-align: left;
         color: $talk-dark;
+
         p {
             color: $topbar-dark;
         }
     }
 }
-    #close-help, #close-advice {
-        width: 44px;
+
+#close-help, #close-advice {
+    width: 44px;
     height: 44px;
     background: white;
     font-size: 44px;
     border-radius: 22px;
-    box-shadow: 0 1px 2px rgba(18,18,20,0.3);
+    box-shadow: 0 1px 2px rgba(18, 18, 20, 0.3);
     font-weight: 200;
     padding: 0;
     position: absolute;
     right: 24px;
     top: 24px;
+
     span {
         margin-top: -6px;
-    display: block;
-    margin-left: 2px;
-    font-size: 50px;
+        display: block;
+        margin-left: 2px;
+        font-size: 50px;
     }
-    }
+}
 
-    #close-advice {
-        top: 1px;
+#close-advice {
+    top: 1px;
     right: 12px;
     background: none;
     box-shadow: none;
@@ -83,7 +188,7 @@ svg {
     height: 24px;
     font-weight: 200;
     color: $topbar-dark;
-    }
+}
 
 //playbar
 #playbar {
@@ -94,7 +199,7 @@ svg {
     bottom: 0;
     max-width: none;
     height: 60px;
-    box-shadow: 0 -1px 3px rgba($talk-dark, .3);
+    box-shadow: 0 -1px 3px rgba($talk-dark, 0.3);
 }
 
 .switch-holder {
@@ -104,24 +209,24 @@ svg {
 .switch-paddle {
     background: $neutralColor;
     border-radius: 16px;
+
     &:after {
         border-radius: 50%;
     }
 }
 
 input:checked ~ .switch-paddle {
-    background: $success-color
+    background: $success-color;
 }
 
 .switch-label {
     color: $neutralColor;
     font-weight: 300;
     text-transform: uppercase;
-    margin:0;
+    margin: 0;
     padding-top: 3px;
     padding-right: 12px;
 }
-
 
 #darkout {
     display: block;
@@ -155,7 +260,7 @@ input:checked ~ .switch-paddle {
     border-radius: 4px;
 
     @include box-shadow(5px, 0.3);
-    
+
     margin-top: 24px;
     margin-left: 24px;
 
@@ -163,6 +268,7 @@ input:checked ~ .switch-paddle {
         margin: 0;
         color: $talk-dark;
     }
+
     #msg {
         padding-bottom: 12px;
         margin-bottom: 12px;
@@ -175,7 +281,7 @@ input:checked ~ .switch-paddle {
     }
 
     .cancel-btn {
-        margin:0;
+        margin: 0;
         background: none;
         color: $talk-dark;
         font-weight: 300;
@@ -193,6 +299,16 @@ input:checked ~ .switch-paddle {
     }
 }
 
+@keyframes connecting {
+    from {
+        stroke-width: 10;
+    }
+
+    to {
+        stroke-width: 5;
+    }
+}
+
 hr {
     border-color: $vr-beige;
 }
@@ -204,59 +320,184 @@ hr {
     animation-direction: alternate;
 }
 
+.connecting {
+    animation-duration: .5s;
+    animation-name: connecting;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 .callout {
     margin: 6px;
 }
 
 #navbar {
-    background: #fff;
+    background: $topbar-dark;
+    height: 48px;
+    color: $vr-light-blue;
 
     @include box-shadow(3px, 0.3);
 
-    max-height: 72px;
+    max-height: 80px;
     position: relative;
     z-index: 900;
-    color: $topbar-dark;
+    display: flex;
 }
 
 #back-arrow, #dropdown, #list-toggle {
     a {
-        color: $topbar-dark;
-        font-size: 24px;
+        color: $charcoal;
+        font-size: .8rem;
+        display: flex;
 
         &:hover {
             color: $vr-light-blue;
         }
     }
 
-    padding: 20px 24px;
+    // padding: 20px 24px;
 
     svg {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
     }
+}
+
+#back-arrow {
+    //padding:5px 0 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 #dropdown {
-    padding-top: 18px;
+    padding: 11px 11px 0 0;
 }
 
-#list-toggle {
-    padding: 14px 24px;
-    a {
-        color: $neutralColor
+
+#toggles .button {
+    border:none;
+    margin: 0;
+    &:hover {
+        background:none;
+        color: $success-color;
     }
+    svg {
+        margin-right:6px;
+
+
+    }
+            &:last-child {
+                svg {
+
+            margin-right:0;
+            margin-left:6px;
+                }
+        }
 }
 
 #talkbar {
     background: #f9f9f9;
-    border-bottom: 1px solid #ddd;
-    position: absolute;
+    position: relative;
     z-index: 800;
-    height: 60px;
+    height: 100px;
     overflow: hidden;
     width: 100%;
     margin-top: 0px;
+
+    @include box-shadow(3px, 0.3);
+
+    @include breakpoint(medium) {
+        height: 36px;
+        // border-bottom: 1px solid $charcoal;
+    }
+
+
+    a {
+        color: white;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+#list-toggle {
+    background: rgba($topbar-dark,.2);
+    color: #ddd;
+    padding: 6px 14px;
+    // border-bottom: 1px solid $charcoal;
+    height: 30px;
+
+    a {
+        color: $oil;
+    }
+
+    a.see-all {
+        font-size: 0.6rem;
+        text-align: center;
+        padding: 0;
+        text-transform: uppercase;
+        font-weight: 600;
+        justify-content:center;
+        color: $oil;
+        position:relative;
+        width:40%;
+        margin:0 auto;
+        &:after {
+            content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 6px;
+    border-color: $oil transparent transparent;
+    border-top-style: solid;
+    border-bottom-width: 0;
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    right: 1rem;
+        }
+
+        &.hide-all {
+            &:after {
+                content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 6px;
+    border-color: transparent transparent $oil;
+    border-bottom-style: solid;
+    border-bottom-width: 6px;
+
+    margin-top: -8px;
+            }
+        }
+
+    }
+
+
+    a {
+        color: $neutralColor;
+    }
+
+    @include breakpoint(medium) {
+        padding: 9px 14px;
+        background:$silver;
+        height:36px;
+    }
+}
+
+
+.dayitem {
+    height:24px;
+    background:$oil;
+    color:$silver;
+    font-size:.8rem;
+        padding: 2px 0 0 12px;
+
 }
 
 #titlerow {
@@ -270,7 +511,8 @@ hr {
 }
 
 .talkitem {
-    padding: 6px 24px;
+    font-size: .8rem;
+    padding: 6px;
     border-bottom: 1px solid $charcoal;
 
     p {
@@ -278,15 +520,13 @@ hr {
     }
 }
 
-
-
 #dropdown .avatar {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: url(../assets/tubes.png) no-repeat 50% 50%;
     background-size: cover;
-    border: 1px solid white;
+    border: 1px solid $charcoal;
 
     @include box-shadow(2px, 0.3);
 
@@ -303,21 +543,26 @@ hr {
     text-align: center;
     background: $vr-purple;
 
+    a {
+        color: white;
+        padding-bottom: 0;
+        height: 60px;
+    }
+
     @include box-shadow(20px, 0.3);
 
     /* display: flex;*/
     /* justify-content: center;*/
     /* align-items: center;*/
     color: white;
-    padding: 24px;
+    padding: 12px;
     position: fixed;
-    top: 220px;
-    left: 24px;
-    right: 24px;
-
-    /* bottom: 24px;*/
-    z-index: 1;
-    overflow: scroll;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 900;
+    overflow: auto;
+    bottom: 12px;
 
     @include breakpoint(medium) {
         max-width: 45rem;
@@ -339,13 +584,35 @@ hr {
     }
 
     li {
-        padding: 12px;
+        padding: 24px;
+        width:50%;
+        float:left;
     }
 
     svg {
         fill: currentColor;
         width: 60px;
         height: 60px;
+    }
+
+    .back-close {
+        margin-bottom:12px;
+        .close-btn {
+            font-size: 3rem;
+    padding: 0;
+    line-height: 1.5rem;
+    font-weight: 200;
+        }
+    .back-btn {
+        svg {
+            width:36px;
+            height:36px;
+        }
+    }
+    }
+
+    .new-box svg {
+        fill: rgba(white,.5);
     }
 }
 
@@ -361,18 +628,15 @@ hr {
 }
 
 #controls {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding-top: 140px;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    // background:yellow;
+    // min-height: 100vh;
+    // margin-top:90px;
+}
+
+#chat-window {
+    background: orange;
+    min-height: 100vh;
+    margin-top: 90px;
 }
 
 #panels {
@@ -383,7 +647,7 @@ hr {
 
 #advice-messages-bg {
     position: absolute;
-    background: rgba($talk-dark, .8);
+    background: rgba($talk-dark, 0.8);
     top: 0;
     bottom: 0;
     left: 0;
@@ -391,21 +655,22 @@ hr {
 }
 
 #advice-message-box {
-        position: absolute;
+    position: absolute;
     background: $vr-yellow;
     padding: 12px;
     border-radius: 4px;
-    @include box-shadow(5px, .3);
+
+    @include box-shadow(5px, 0.3);
+
     p {
-    color: $topbar-dark;
-    font-weight: 300;
-    max-width: 75%;
-    margin: 0;
-    float:left;
-    min-width: 150px;
+        color: $topbar-dark;
+        font-weight: 300;
+        max-width: 75%;
+        margin: 0;
+        float: left;
+        min-width: 150px;
     }
 }
-
 
 #msg-center {
     padding: 0;
@@ -504,7 +769,7 @@ html, body {
 /*   stroke-width: 6px;*/
 /* }*/
 
-.panelbox {
+#panels {
     position: relative;
 
     /* border: 1px dotted $oil;*/
@@ -535,17 +800,33 @@ html, body {
         stroke: $neutralColor;
     }
 
-    path#overlay {
+    path.overlay {
         stroke: rgba($almost-black, 0);
+        transform-origin: 50%;
+    }
+
+    path.button {
+        stroke-width: 0;
+        fill: $success-color;
+        transform-origin: 50%;
     }
 
     line {
         stroke: $bgColor;
     }
 
-    path#hub {
+    path.hub {
         stroke: none;
         fill: $bgColor;
+    }
+
+    text {
+        stroke: none;
+        fill: $talk-dark;
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        pointer-events: none;
     }
 
     .base-ring {
@@ -558,59 +839,6 @@ html, body {
 #broadcast {
     margin: 0 auto;
     position: relative;
-}
-
-#server-circle-holder {
-    position: relative;
-
-    #server-circle {
-        position: absolute;
-        border: none;
-        padding: 0;
-
-        svg {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-        }
-    }
-}
-
-.panel-circle-holder {
-    width: 100%;
-    height: 100%;
-    display: block;
-
-    /* border-radius: 80px;*/
-    /* border: 6px solid rgba(black, .3);*/
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0 auto;
-    transition: border .2s ease;
-    position: relative;
-
-    &.success {
-        border: 6px solid #3adb76;
-    }
-
-    svg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform: rotate(-90deg);
-
-        &.neutral-circle path {
-            stroke: rgba(black, 0.4);
-        }
-    }
-}
-
-#broadcast-circle {
-    padding: 0;
-}
-
-#server-circle {
-    svg {}
 }
 
 .start-btn {
@@ -626,8 +854,10 @@ html, body {
 }
 
 #titlebar {
-    padding-top: 21px;
-    height: 72px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 
     /* margin-bottom: 60px;*/
     .label {
@@ -644,13 +874,15 @@ html, body {
         margin-bottom: 0;
     }
 
-    p#venue-title {
-        color: $topbar-dark;
+    #venue-title {
+        color: $silver;
         font-weight: normal;
-        font-size: 1.25rem;
+        font-size: .8rem;
         text-transform: uppercase;
-        letter-spacing: rem-calc(2);
+        letter-spacing: rem-calc(1);
         font-family: $header-font-family;
+        margin-bottom: 0;
+        line-height: .8rem;
     }
 
     .talk-label {
@@ -660,6 +892,11 @@ html, body {
     }
 }
 
+.next-talk, .time-info {
+    font-weight: 200;
+    color: #eee;
+}
+
 #talk-titlebar {
     padding: 18px 24px 0 0;
 
@@ -667,30 +904,40 @@ html, body {
         color: $oil;
     }
 
-    .next-talk, .time-info {
-        font-weight: 200;
-        color: $charcoal;
-    }
-
     a {
-        color: $oil;
-        &:hover 
-        { text-decoration: underline 
+        color: $white;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 }
-    #help-link {
-        padding: 14px;
-        .button {
-            border-radius: 50%;
-            color: $talk-dark;
-            background: $vr-yellow;
-            width: 28px;
-            height: 28px;
-            padding: 5px 9px;
-    font-weight: 500;
-        }
+
+#current, #next {
+    height: 36px;
+    // border-bottom: 1px solid $charcoal;
+    background: rgba($topbar-dark,.3);
+    padding: 8px 12px;
+    font-size: .8rem;
+}
+
+#current {
+    background: rgba($topbar-dark,.5);
+}
+
+#help-link {
+    // padding: 14px;
+    .button {
+        border-radius: 50%;
+        color: $talk-dark;
+        background: $vr-yellow;
+        width: 25px;
+        height: 25px;
+        padding: 5px 8px;
+        font-weight: 500;
     }
+}
+
 .talkitem {
     p {
         color: $oil;
@@ -698,12 +945,12 @@ html, body {
         .time {
             font-weight: 200;
             color: $charcoal;
-            min-width: 160px;
+            // min-width: 160px;
             display: inline-block;
         }
 
         .title {
-            padding-left: 12px;
+            padding-left: 6px;
         }
 
         &.header {
@@ -717,5 +964,107 @@ html, body {
 
     &.header {
         border-color: #bbb;
+    }
+}
+
+
+//messages
+#message-container {
+    padding: 12px 6px;
+    background: #f8f8f8;
+    min-height: 100vh;
+    padding-bottom:10px;
+    @include breakpoint(medium){
+        padding-bottom:60px;
+    }
+.message-row {
+    margin: 0;
+}
+}
+
+
+
+.message-losenge {
+    background:$vr-beige;
+    margin:6px;
+    @include box-shadow(3px, .3);
+    border-radius: 4px;
+    padding: 6px;
+    font-size: .9rem;
+    color: #333;
+    padding-bottom: 21px;
+    max-width: 60%;
+    position:relative;
+    &.right {
+        background:white;
+
+    }
+    .message-time {
+        position: absolute;
+    bottom: 3px;
+    right: 6px;
+    font-size: .7rem;
+    color: #999;
+    }
+}
+
+#first-message {
+    position: absolute;
+    bottom: 60px;
+    left: 12px;
+    padding:0;
+    margin:0;
+    .message-losenge {
+        background:$vr-yellow;
+        max-width:75%;
+        .strong {
+            text-decoration:underline;
+        }
+    }
+
+    @include breakpoint(medium){
+        position:relative;
+        bottom:0;
+        left:0;
+    }
+}
+
+#chat-input {
+    background: #fff;
+    color: $oil;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 50px;
+    box-shadow:0 -1px 3px rgba($talk-dark,.3);
+    float:left;
+    width:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    @include breakpoint(medium){
+        position:fixed;
+        left:50%;
+        width:50%;
+    }
+    #chat-icon,#chat-send {
+        padding: 12px;
+        color: $charcoal;
+        flex:0 0 36px;
+        height:40px;
+        svg {
+            width:18px;
+            height:18px;
+
+        }
+    }
+
+    #chat-input-field {
+        flex: 1 1 100%;
+        align-self: center;
+        height:36px;
     }
 }

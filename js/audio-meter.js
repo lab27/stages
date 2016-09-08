@@ -16,8 +16,8 @@
     var frequencyData = new Uint8Array(16);
 
 
-    var svgHeight = 168,
-        svgWidth = 168;
+    var svgHeight = 200,
+        svgWidth = 200;
 
     //var svg = d3.select('#connection-circle-svg')
 
@@ -51,7 +51,7 @@
         //     .range([0, 360]);
 
        // update d3 chart with new data
-       var circles = svg.selectAll('circle')
+       var circles = svg
            .data([volume]);
 
         circles.enter().append('circle');
@@ -59,15 +59,17 @@
         circles
             .attr({
                 r: function(d) { return radiusScale(d); },
-                cx: svgWidth / 2,
-                cy: svgHeight / 2,
-                fill: 'none',
-                'opacity':1,
-                'stroke-width': volume/5,
-                'stroke-opacity': volume/100,
+
+                //cx: svgWidth / 2,
+                //cy: svgHeight / 2,
+                fill: vrGreen,
+                'opacity':volume/200,
+                'class':'meter'
+                //'stroke-width': volume/5,
+                //'stroke-opacity': volume/100,
                 //'stroke-dasharray': volume/10,
                 //'stroke-dashoffset':volume,
-                stroke: "#d8f793"
+                //stroke: "none"
            });
 
         circles.exit().remove(); 
