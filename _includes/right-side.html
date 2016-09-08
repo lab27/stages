@@ -8,18 +8,16 @@
 			</div>
 		</div>
 	{% endfor %}
+</div>
 	<div id="chat-input" class="clearfix">
-		<div class="small-1 columns" id="chat-icon">{% include svg_icon.svg name='chat'%}</div>
-		<div class="small-10 columns" id="chat-input-field">
+		<div  id="chat-icon" class="float-left">{% include svg_icon.svg name='chat'%}</div>
+		<div id="chat-input-field" class="float-left">
 			<form>
-    <div class="medium-12 columns">
       <label>
-        <input type="text" placeholder="enter text here">
+        <input type="text" placeholder="">
       </label>
-    </div>
  
 </form>
 		</div>
-		<div class="small-1 columns float-right" id="chat-send">send</div>
+		<div class="float-right" id="chat-send">{% include svg_icon.svg name='airplane'%}</div>
 	</div>
-</div>

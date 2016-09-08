@@ -1,10 +1,10 @@
-<div id="left-side" class="medium-6 columns float-left no-pad text-center" >
+<div id="left-side" class="medium-6 columns no-pad text-center" >
 	<div id="toggles" class="clearfix">
 		<button class="tiny button btn-gray btn-hover-green hollow float-left">{% include svg_icon.svg name='bolt'%}autostart</button>
 		<button class="tiny button btn-gray btn-hover-green hollow float-right">sound{% include svg_icon.svg name='sound_on'%}</button>
 	</div>
 	<div id="circles"></div>
-	<div id="speakers" class="medium-8 columns medium-offset-2 end">
+	<div id="speakers" class="medium-10 columns medium-offset-1 end">
 		<h4 class="section-title text-center">Speakers</h4>
 		<ul class="menu vertical">
 			{% for speaker in site.data.speakers %}

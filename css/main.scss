@@ -37,7 +37,10 @@ h4.section-title {
     background: #eee;
     height: auto;
     padding-bottom: 24px;
+    @include breakpoint(medium){
+        float:left;
     min-height: 100vh;
+    }
 }
 
 #toggles {
@@ -106,12 +109,12 @@ h4.section-title {
 
         svg {
             fill: currentColor;
-            width: 18px;
-            height: 18px;
+            width: 12px;
+            height: 12px;
         }
 
         .speaker-name {
-            vertical-align: -webkit-baseline-middle;
+            vertical-align: baseline;
             margin-left: 6px;
             letter-spacing: rem-calc(1);
         }
@@ -373,7 +376,7 @@ hr {
 }
 
 #list-toggle {
-    background: #ddd;
+    background: rgba($topbar-dark,.2);
     color: #ddd;
     padding: 6px 14px;
     border-bottom: 1px solid $charcoal;
@@ -387,6 +390,38 @@ hr {
         font-weight: 600;
         justify-content:center;
         color: $oil;
+        position:relative;
+        width:40%;
+        margin:0 auto;
+        &:after {
+            content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 6px;
+    border-color: $oil transparent transparent;
+    border-top-style: solid;
+    border-bottom-width: 0;
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    right: 1rem;
+        }
+
+        &.hide-all {
+            &:after {
+                content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 6px;
+    border-color: transparent transparent $oil;
+    border-bottom-style: solid;
+    border-bottom-width: 6px;
+
+    margin-top: -8px;
+            }
+        }
 
     }
 
@@ -504,6 +539,8 @@ hr {
 
     a {
         color: white;
+        padding-bottom: 0;
+        height: 60px;
     }
 
     @include box-shadow(20px, 0.3);
@@ -512,15 +549,14 @@ hr {
     /* justify-content: center;*/
     /* align-items: center;*/
     color: white;
-    padding: 24px;
+    padding: 12px;
     position: fixed;
-    top: 220px;
-    left: 24px;
-    right: 24px;
-
-    /* bottom: 24px;*/
-    z-index: 1;
-    overflow: scroll;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 900;
+    overflow: auto;
+    bottom: 12px;
 
     @include breakpoint(medium) {
         max-width: 45rem;
@@ -542,13 +578,35 @@ hr {
     }
 
     li {
-        padding: 12px;
+        padding: 24px;
+        width:50%;
+        float:left;
     }
 
     svg {
         fill: currentColor;
         width: 60px;
         height: 60px;
+    }
+
+    .back-close {
+        margin-bottom:12px;
+        .close-btn {
+            font-size: 3rem;
+    padding: 0;
+    line-height: 1.5rem;
+    font-weight: 200;
+        }
+    .back-btn {
+        svg {
+            width:36px;
+            height:36px;
+        }
+    }
+    }
+
+    .new-box svg {
+        fill: rgba(white,.5);
     }
 }
 
@@ -852,13 +910,13 @@ html, body {
 #current, #next {
     height: 36px;
     border-bottom: 1px solid $charcoal;
-    background: #ccc;
+    background: rgba($topbar-dark,.3);
     padding: 8px 12px;
     font-size: .8rem;
 }
 
 #current {
-    background: #bbb;
+    background: rgba($topbar-dark,.5);
 }
 
 #help-link {
@@ -907,12 +965,14 @@ html, body {
 //messages
 #message-container {
     padding: 12px 6px;
-    background: #f4f4f4;
+    background: #f8f8f8;
     min-height: 100vh;
 .message-row {
     margin: 0;
 }
 }
+
+
 
 .message-losenge {
     background:$vr-beige;
@@ -938,21 +998,57 @@ html, body {
     }
 }
 
+#first-message {
+    position: absolute;
+    bottom: 60px;
+    left: 12px;
+    padding:0;
+    margin:0;
+    .message-losenge {
+        background:$vr-yellow;
+        max-width:75%;
+        .strong {
+            text-decoration:underline;
+        }
+    }
+}
+
 #chat-input {
     background: #fff;
     color: $oil;
-    position: absolute;
+    position: relative;
     bottom: 0;
     right: 0;
-    left: 50%;
+    left: 0;
     height: 50px;
     box-shadow:0 -1px 3px rgba($talk-dark,.3);
+    float:left;
+    width:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    @include breakpoint(medium){
+        position:fixed;
+        left:50%;
+        width:50%;
+    }
     #chat-icon,#chat-send {
         padding: 12px;
+        color: $charcoal;
+        flex:0 0 36px;
+        height:40px;
         svg {
-            width:24px;
-            height:24px;
+            width:18px;
+            height:18px;
 
         }
+    }
+
+    #chat-input-field {
+        flex: 1 1 100%;
+        align-self: center;
+        height:36px;
     }
 }

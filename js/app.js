@@ -253,14 +253,14 @@ $('#list-toggle a').on('click', function(){
 	//open the list
 	TweenMax.to(listBox,.3,{height:"auto",ease:Power2.easeOut,onComplete:function(){
 		listOpen = true
-		$('.see-all').html("hide")
+		$('.see-all').html("hide").addClass("hide-all")
 	}})
 	} else {
 		//close the list
 	console.log("what is talkbar height still: " + talkbarHeight)
 	TweenMax.to(listBox,.3,{height:talkbarHeight,ease:Power2.easeOut,onComplete:function(){
 		listOpen = false
-		$('.see-all').html("see all")
+		$('.see-all').html("see all").removeClass("hide-all")
 	}})
 	}
 })
