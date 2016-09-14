@@ -4,11 +4,16 @@ var spacing = 5;
 var radius1 = (svgWidth/2)-(strokeWidth/2);
 var radius2 = (svgWidth/2)-strokeWidth-(strokeWidth/2)-spacing;
 var radius3 = (svgWidth/2)-(strokeWidth*2)-(strokeWidth/2)-(spacing*2);
+var interval = null;
 
 var svgContainer = d3.select("#circles").append("svg")
                                     .attr("viewBox", "0 0 " + svgWidth + " " + svgWidth);
         
-var buttonClickCounter = 0;                                  
+var buttonClickCounter = 0;       
+
+var playRings = function(){
+	ringsTL.play()
+}                           
 
 //server base
 var serverBase = svgContainer.append("circle")
@@ -45,6 +50,15 @@ var streamBase = svgContainer.append("circle")
 	.attr("stroke-width", strokeWidth)
 	.attr("r", radius3)
 	.attr("class","base");
+
+//stream overlay
+var streamOverlay = svgContainer.append("circle")
+	.attr("cx", "50%")
+	.attr("cy", "50%")
+	.attr("fill", "none")
+	.attr("stroke-width", strokeWidth)
+	.attr("r", radius3)
+	.attr("class","overlay");
 
 //button
 var button = svgContainer.append("circle")
@@ -142,24 +156,33 @@ button.on("click", function() {
 	}
 });
 
-
+//click away the first modal:
+$("#main-modal #modal-box button").on('click',function(){
+	ringsTL.play()
+})
 
 //set initial states:
 TweenMax.set(serverOverlay,{rotation:-90,transformOrigin: "50% 50%",drawSVG:"0%",stroke:vrLtBlue})
+TweenMax.set(streamOverlay,{rotation:-90,transformOrigin: "50% 50%",drawSVG:"0%",stroke:"black",strokeOpacity:".3"})
 //set up timeling
 var ringsTL = new TimelineMax(tmax_options);
 //server starts
-ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
-.add("shrinkit")
+ringsTL
+.addPause()
+.to($('#main-modal'),.2,{autoAlpha:0})
+.to(serverOverlay,1,{drawSVG:"100%"})
 //text goes away
 .set(buttonText,{className:"+=hide"})
 //server turns green
+.add("shrinkit")
 .to(serverOverlay,.2,{stroke:vrGreen,onComplete:function(){
-	buttonText.html("select").attr("fill","white")
+	buttonText.html("select source").attr("fill","white")
 }},"shrinkit")
 //server lines shrink
 .to(serverOverlay,.2,{strokeWidth:5,attr:{r:radius1-2.5},ease:Power2.easeOut},"shrinkit")
 .to(serverBase,.2,{strokeWidth:5,attr:{r:radius1-2.5},ease:Power2.easeOut},"shrinkit")
+// popup displays
+.to($('#first-message'),.5,{autoAlpha:1, display: "block", scaleX:1, scaleY:1, ease:Bounce.easeOut})
 //select source button appears
 .to(button,.2,{attr:{r:radius3-spacing-strokeWidth}})
 .set(buttonText,{className:"-=hide"})
@@ -185,8 +208,8 @@ ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
 .to(buttonText,.2,{fill:vrGreen})
 //show stream button
 .to(buttonText,.2,{fill:"white"})
-.to(button,.2,{className:"=+stream",autoAlpha:1,attr:{r:radius3-spacing-strokeWidth-strokeWidth},onComplete:function(){
-	buttonText.html("stream")
+.to(button,.2,{className:"+=stream",cursor:"pointer",autoAlpha:1,attr:{r:radius3-spacing-strokeWidth-strokeWidth},onComplete:function(){
+	buttonText.html("start stream")
 }})
 .addPause()
 .to(streamBase,.2,{stroke:vrGreen})
@@ -196,10 +219,11 @@ ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
 	.attr("ry", "2")
 	.attr("width","15")
 	.attr("height","15")
-	.attr("x",100-7.5)
-	.attr("y",110)
+	.attr("x",svgWidth/2 - 7.5)
+	.attr("y",svgWidth/2 + 30)
 	.attr("fill",vrRed)
-	.attr("id","stopButton");
+	.attr("id","stopButton")
+	.on("click",playRings);
 	(function() {
      var counter = 0,
      cDisplay = document.getElementById("buttonText");
@@ -210,9 +234,37 @@ ringsTL.to(serverOverlay,1,{drawSVG:"100%"})
          seconds = (seconds < 10) ? "0" + seconds.toString() : seconds.toString();
          cDisplay.innerHTML = minutes + ":" + seconds;
      };
-    setInterval(function() {
+    interval = setInterval(function() {
        counter++;
        format(counter);
     },100);
 })();
 }})
+.to(buttonText,.2,{fill:"#666", onComplete:function(){
+	//prepare the stopping early modal text
+	$('#main-modal #modal-box p.lead').html('Are you sure you want to stop early?')
+}})
+.set(streamOverlay,{drawSVG:0})
+.to(streamOverlay,10,{drawSVG:10})
+.addPause()
+//show stopping early modal
+.set($('#main-modal .cancel'),{className:"-=hide", onComplete:function(){
+	$('#main-modal #modal-box .yes').html("yes").on('click',playRings)
+}})
+.to($('#main-modal'),.2,{autoAlpha:1})
+.addPause()
+//hide modal
+.to($('#main-modal'),.2,{autoAlpha:0})
+//stream ring turns gray
+.to(streamBase,.2,{stroke:"#bbb",onComplete:function(){
+	console.log('finished making stream gray')
+	svgContainer.selectAll("rect#stopButton").attr("class","hide");
+	clearInterval(interval)
+	$('#chat-form input').val('The Talk has ended.')
+	$('#chat-form').submit()
+}})
+//hide stop button
+// .to($('#circles svg rect#stopButton'),.2,{autoAlpha:0, onComplete:function(){
+// 	//stop counter
+// }})
+

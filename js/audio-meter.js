@@ -32,7 +32,7 @@
 
     // continuously loop and update chart with frequency data.
     function renderChart(el) {
-        console.log("My element: "+ el + ", or my element: " + $(el))
+        //console.log("My element: "+ el + ", or my element: " + $(el))
         var svg = d3.select(el)
         requestAnimationFrame(function(){renderChart(el)});
 

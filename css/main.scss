@@ -108,13 +108,11 @@ h4.section-title {
     a {
         color: $topbar-dark;
         padding: 6px;
-
-    
-    background: #f4f4f4;
-    margin: 3px 2px;
-    border-radius: 2px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    font-size: .7rem;
+        background: #f4f4f4;
+        margin: 3px 2px;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px rgba(0,0,0,.1);
+        font-size: .7rem;
 
         &:hover {
             background:#fff;
@@ -132,9 +130,16 @@ h4.section-title {
             margin-left: 6px;
             letter-spacing: rem-calc(1);
         }
+
+        &.active {
+        background:$success-color;
+        color:white;
+        }
     }
 .menu>li {
 display: inline-block; }
+
+
 }
 
 svg {
@@ -363,6 +368,7 @@ hr {
         color: $charcoal;
         font-size: .8rem;
         display: flex;
+        //width:100%;
 
         &:hover {
             color: $vr-light-blue;
@@ -375,6 +381,7 @@ hr {
         width: 18px;
         height: 18px;
         margin-right: 6px;
+        float:left;
     }
 }
 
@@ -419,10 +426,17 @@ hr {
     overflow: hidden;
     width: 100%;
     margin-top: 0px;
+    max-width:100%;
+    min-width:100%;
+   
 
     @include box-shadow(3px, 0.3);
 
     @include breakpoint(medium) {
+         display:flex;
+         flex-flow:row wrap;
+    @include grid-row();
+        max-width:100%;
         height: 36px;
         // border-bottom: 1px solid $charcoal;
     }
@@ -436,18 +450,45 @@ hr {
             text-decoration: underline;
         }
     }
+
+    #list-toggle{
+        width: 100%;
+        @include breakpoint(medium){
+         flex:1 0 20%;
+        float:left;
+        }
+        @include breakpoint(large){
+            flex:1 0 10%;
+        }
+        a {
+            width:100%;
+             svg {
+                margin-left:auto;
+                float:right;
+             }
+        }
+    }
+
+    #current, #next {
+        width: 100%;
+     @include breakpoint(medium){
+        flex:1 0 40%;
+        float:left;
+        }    
+
+    @include breakpoint(large){
+        flex:1 0 45%;
+    }
+    }
 }
 
 #list-toggle {
-    background: rgba($topbar-dark,.2);
-    color: #ddd;
+    background: $vr-light-blue;
+    color: white;
     padding: 6px 14px;
     // border-bottom: 1px solid $charcoal;
     height: 30px;
 
-    a {
-        color: $oil;
-    }
 
     a.see-all {
         font-size: 0.6rem;
@@ -494,24 +535,38 @@ hr {
 
 
     a {
-        color: $neutralColor;
+        color: #f4f4f4;
+        &:hover {
+            color:white;
+        }
     }
 
     @include breakpoint(medium) {
         padding: 9px 14px;
-        background:$silver;
+        // background:$silver;
         height:36px;
     }
 }
 
 
-.dayitem {
+.dayitem, .headeritem {
     height:24px;
     background:$oil;
     color:$silver;
     font-size:.8rem;
-        padding: 2px 0 0 12px;
+    padding: 2px 12px 0 12px;
 
+    p span {
+        width:25%;
+        display:inline-block;
+        float:left;
+    }
+
+}
+
+.headeritem {
+    background:none;
+    color: $talk-dark;
 }
 
 #titlerow {
@@ -526,11 +581,14 @@ hr {
 
 .talkitem {
     font-size: .8rem;
-    padding: 6px;
+    padding: 6px 12px;
     border-bottom: 1px solid $charcoal;
 
     p {
         margin: 0;
+        span {
+            width:25%;
+        }
     }
 }
 
@@ -630,17 +688,42 @@ hr {
     }
 }
 
+.has-tip {
+    border-bottom: none;
+    font-weight:normal;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
 .accordion {
     background: none;
     border: none;
 }
 
-#msg-center {
-    max-width: 35rem;
-
-    /* margin-bottom: 60px;*/
+#main-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba($talk-dark,.8);
+    height: 100vh;
+    display:flex;
+    flex-flow:row nowrap;
 }
-
+#modal-box {
+    flex: 0 0 90%;
+    background: white;
+    height: auto;
+    padding: 24px 24px 0 24px;
+    border-radius: 4px;
+    align-self: center;
+    margin:0 auto;
+    @include breakpoint(medium){
+        flex:0 0 45%;
+    }
+}
 #controls {
     // background:yellow;
     // min-height: 100vh;
@@ -742,6 +825,10 @@ hr {
     color: $success-color;
 }
 
+#stopButton {
+    cursor:pointer;
+}
+
 .panel-button {
     position: absolute;
     top: 40px;
@@ -777,78 +864,7 @@ html, body {
     background: $bgColor;
 }
 
-/* path {*/
-/*   fill: none;*/
-/*   stroke: $vr-light-blue;*/
-/*   stroke-width: 6px;*/
-/* }*/
 
-#panels {
-    position: relative;
-
-    /* border: 1px dotted $oil;*/
-    text-align: center;
-    padding: 3px;
-
-    h5 {
-        font-family: $body-font-family;
-        font-weight: 500;
-        letter-spacing: rem-calc(1);
-        margin: 0;
-        font-size: 10px;
-        color: $silver;
-        text-align: center;
-        margin-bottom: 6px;
-        text-transform: uppercase;
-        width: auto;
-        background: $neutralColor;
-        padding: 3px 7px;
-        position: relative;
-        display: inline-block;
-        border-radius: 2px;
-    }
-
-    svg {
-        fill: none;
-        stroke-width: 5px;
-        stroke: $neutralColor;
-    }
-
-    path.overlay {
-        stroke: rgba($almost-black, 0);
-        transform-origin: 50%;
-    }
-
-    path.button {
-        stroke-width: 0;
-        fill: $success-color;
-        transform-origin: 50%;
-    }
-
-    line {
-        stroke: $bgColor;
-    }
-
-    path.hub {
-        stroke: none;
-        fill: $bgColor;
-    }
-
-    text {
-        stroke: none;
-        fill: $talk-dark;
-        font-size: 10px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        pointer-events: none;
-    }
-
-    .base-ring {
-        border: 6px solid rgba($almost-black, 0.3);
-        border-radius: 50%;
-        margin: 0 auto;
-    }
-}
 
 #broadcast {
     margin: 0 auto;
@@ -949,6 +965,10 @@ html, body {
         height: 25px;
         padding: 5px 8px;
         font-weight: 500;
+        &:hover {
+            background:$vr-yellow;
+            color:$talk-dark;
+        }
     }
 }
 
@@ -963,9 +983,9 @@ html, body {
             display: inline-block;
         }
 
-        .title {
-            padding-left: 6px;
-        }
+        // .title {
+        //     padding-left: 6px;
+        // }
 
         &.header {
             font-weight: 500;
@@ -1062,7 +1082,7 @@ html, body {
     @include breakpoint(medium){
         position:fixed;
         left:66.66667%;
-        width:50%;
+        width:33.33333%;
     }
     #chat-icon,#chat-send {
         padding: 12px;

@@ -1,65 +1,97 @@
-<div class="row expanded" id="talkbar">
-	<div class="medium-6 columns" id="current">
+<div id="talkbar">
+	<div id="current">
 		<p id="current-talk-title">
 			<span class="next-talk">Now: </span>
 			<a href="#">Gorgeous Metal Steering Wheel</a>
 			<span class="float-right time-info">00:12</span>
 		</p>
 	</div>
-	<div class="medium-5  columns" id="next">
+	<div id="next">
 		<p id="current-talk-title">
 			<span class="next-talk">Next: </span>
 			<a href="#">Stream A Little Stream of Me</a>
 			<span class="float-right time-info">(14:30)</span>
 		</p>
 	</div>
-	<div class="medium-1 columns" id="list-toggle">
-		<a href="#" class="float-right hide-for-small-only">{% include svg_icon.svg name='list'%}</a>
-		<a class="see-all show-for-small-only text-center">see all</a>
+	<div id="list-toggle">
+		<a href="#" class="float-left hide-for-small-only">
+			<span class="show-for-medium float-left">VIEW ALL</span>
+			{% include svg_icon.svg name='list'%}
+		</a>
+		<a class="see-all show-for-small-only text-center">view all</a>
 	</div>
-
 	<div class="row clearfix" id="listrow">
+		<!-- TODAY -->
 
-<!-- TODAY -->
-	<div class="small-12 columns dayitem clearfix">
-			<p class="">TODAY
-		</p>
-	</div>
-	{% for talk in site.data.talks limit:5 %}
-		<div class="small-12 columns talkitem clearfix">
-			<p class="clearfix">
-			<span class="title float-left text-left">{{talk.title}}</span>
-			<span class="time float-right text-right">{{talk.time}}</span>
-		</p>
-	</div>
-{% endfor %}
-
-<!-- TOMORROW -->
-	<div class="small-12 columns dayitem clearfix">
+			<div class="small-12 columns dayitem clearfix">
+			<p class="">
+			<span>TODAY</span>
+		
+			</p>
+		</div>
+				<div class="small-12 columns headeritem clearfix">
+			<p class="">
+			<span>TITLE</span>
+			<span>TIME</span>
+			<span>SERIES</span>
+			<span class="text-right">DURATION</span>
+			</p>
+		</div>
+		{% for talk in site.data.talks limit:5 %}
+			<div class="small-12 columns talkitem clearfix">
+				<p class="clearfix">
+					<span class="title float-left text-left">{{talk.title}}</span>
+					<span class="time float-left text-left">{{talk.time}}</span>
+					<span class="series float-left text-left">{{talk.series}}</span>
+					<span class="duration float-left text-right">{{talk.duration}}</span>
+				</p>
+			</div>
+		{% endfor %}
+		<!-- TOMORROW -->
+		<div class="small-12 columns dayitem clearfix">
 			<p class="">TOMORROW
-		</p>
-	</div>
-	{% for talk in site.data.talks offset:5 limit:5 %}
-		<div class="small-12 columns talkitem clearfix">
-			<p class="clearfix">
-			<span class="title float-left text-left">{{talk.title}}</span>
-			<span class="time float-right text-right">{{talk.time}}</span>
-		</p>
-	</div>
-{% endfor %}
-
-<!-- oct 3 -->
-	<div class="small-12 columns dayitem clearfix">
+			</p>
+		</div>
+				<div class="small-12 columns headeritem clearfix">
+			<p class="">
+			<span>TITLE</span>
+			<span>TIME</span>
+			<span>SERIES</span>
+			<span class="text-right">DURATION</span>
+			</p>
+		</div>
+		{% for talk in site.data.talks offset:5 limit:5 %}
+			<div class="small-12 columns talkitem clearfix">
+				<p class="clearfix">
+					<span class="title float-left text-left">{{talk.title}}</span>
+					<span class="time float-left text-left">{{talk.time}}</span>
+					<span class="series float-left text-left">{{talk.series}}</span>
+					<span class="duration float-left text-right">{{talk.duration}}</span>
+				</p>
+			</div>
+		{% endfor %}
+		<!-- oct 3 -->
+		<div class="small-12 columns dayitem clearfix">
 			<p class="">OCTOBER 3
-		</p>
+			</p>
+		</div>
+				<div class="small-12 columns headeritem clearfix">
+			<p class="">
+			<span>TITLE</span>
+			<span>TIME</span>
+			<span>SERIES</span>
+			<span class="text-right">DURATION</span>
+			</p>
+		</div>
+		{% for talk in site.data.talks offset: 10 limit:5 %}
+			<div class="small-12 columns talkitem clearfix">
+				<p class="clearfix">
+					<span class="title float-left text-left">{{talk.title}}</span>
+					<span class="time float-left text-left">{{talk.time}}</span>
+					<span class="series float-left text-left">{{talk.series}}</span>
+					<span class="duration float-left text-right">{{talk.duration}}</span>
+				</p>
+			</div>
+		{% endfor %}
 	</div>
-	{% for talk in site.data.talks offset: 10 limit:5 %}
-		<div class="small-12 columns talkitem clearfix">
-			<p class="clearfix">
-			<span class="title float-left text-left">{{talk.title}}</span>
-			<span class="time float-right text-right">{{talk.time}}</span>
-		</p>
-	</div>
-{% endfor %}
-</div>
 </div>
