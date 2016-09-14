@@ -78,6 +78,20 @@ h4.section-title {
         letter-spacing: 1px;
         pointer-events: none;
     }
+
+    svg #ui-labels text {
+        font-size:6px;
+        letter-spacing:1px;
+    }
+
+    #ui-labels {
+        opacity:0;
+        transition: opacity .2s linear;
+
+        &.shown {
+            opacity:1;
+        }
+    }
 }
 
 #meter {
@@ -1047,7 +1061,7 @@ html, body {
 
     @include breakpoint(medium){
         position:fixed;
-        left:50%;
+        left:66.66667%;
         width:50%;
     }
     #chat-icon,#chat-send {

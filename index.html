@@ -1,25 +1,18 @@
 ---
 layout: default
-title: Stage of Nick Niles
+title: Reeperbahn Festival Bühne 2
 talk: Teaching An Old Dog New Tricks
 ---
 <audio id="audioElement" src="assets/allensmall.m4a"></audio>
+
 {% include navbar.html %}
 {% include talkbar.html %}
 {% include help.html %}
 
-<div class="row clearfix expanded">
-<div class="medium-6 columns float-left" style="background: orange; min-height: 100vh;">left</div>
-<div class="medium-6 columns float-right" style="background: yellow; min-height: 100vh;">right</div>
+<div id="ui" class="row clearfix expanded">
+{% include left-side.html %}
+{% include right-side.html %}
 
-</div>
-
-<!-- <div id="spotlight"></div> -->
-<!-- <div id="spotlight-msg" class="" style="opacity:0">
-<p id="msg" class="float-left clearfix">Want to take a tour of the control panel?</p>
-<p class="clearfix"><a href="#" class="button success cancel-btn float-left">No Thanks</a>
-<a href="#" class="button success spotlight-btn float-right">Let's Go!</a></p>
-</div> -->
-
-</div>
 {% include devices.html %}
+
+

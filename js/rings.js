@@ -1,4 +1,4 @@
-var svgWidth = 200;
+var svgWidth = 260;
 var strokeWidth = 10;
 var spacing = 5;
 var radius1 = (svgWidth/2)-(strokeWidth/2);
@@ -64,6 +64,68 @@ var buttonText = svgContainer.append("text")
 	.attr("id","buttonText")
 	.attr("fill", vrLtBlue)
 	.html("launching...");
+
+
+var UILabels = svgContainer.append("g")
+	.attr("id","ui-labels");
+
+
+var line1 = UILabels.append("line")
+	.attr("x1","56.8")
+	.attr("y1","31.8")
+	.attr("x2","35")
+	.attr("y2","10")
+	.attr("stroke","#666")
+	.attr("stroke-width",".5");
+
+var line2 = UILabels.append("line")
+	.attr("x1","57.6")
+	.attr("y1","46.6")
+	.attr("x2","35.5")
+	.attr("y2","24.5")
+	.attr("stroke","#666")
+	.attr("stroke-width",".5");
+
+var line3 = UILabels.append("line")
+	.attr("x1","61.1")
+	.attr("y1","64.6")
+	.attr("x2","35.5")
+	.attr("y2","38.9")
+	.attr("stroke","#666")
+	.attr("stroke-width",".5");
+
+var serverLabel = UILabels.append("text")
+	.attr("x", "1")
+	.attr("height", 12)
+	.attr("y", "10")
+	.attr("text-anchor", "left")
+	.attr("font-size", "8")
+	.attr("id","server-label")
+	.attr("fill", "#666")
+	.html("server");
+
+var sourceLabel = UILabels.append("text")
+	.attr("x", "1")
+	.attr("height", 12)
+	.attr("y", "25")
+	.attr("text-anchor", "left")
+	.attr("font-size", "8")
+	.attr("id","source-label")
+	.attr("fill", "#666")
+	.html("source");
+
+var streamlabel = UILabels.append("text")
+	.attr("x", "1")
+	.attr("height", 12)
+	.attr("y", "40")
+	.attr("text-anchor", "left")
+	.attr("font-size", "8")
+	.attr("id","stream-label")
+	.attr("fill", "#666")
+	.html("stream");
+
+
+
 
 //click events
 button.on("click", function() {

@@ -70,6 +70,18 @@ var tmax_options = {
   onRepeatParams: []
 };
 
+//hover svg show labels 
+
+$("#circles").on('mouseenter',function(){
+	console.log("hovering svg")
+	$("#circles svg g#ui-labels").css('opacity',1)
+});
+
+$("#circles").on('mouseleave',function(){
+	console.log("leaving svg")
+	$("#circles svg g#ui-labels").css('opacity',0)
+});
+
 //chat submit 
 $('#chat-form').submit(function(event){
 	console.log('submitted the form!!')
