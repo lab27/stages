@@ -458,7 +458,7 @@ hr {
         float:left;
         }
         @include breakpoint(large){
-            flex:1 0 10%;
+            flex:1 0 12%;
         }
         a {
             width:100%;
@@ -477,7 +477,7 @@ hr {
         }    
 
     @include breakpoint(large){
-        flex:1 0 45%;
+        flex:1 0 44%;
     }
     }
 }

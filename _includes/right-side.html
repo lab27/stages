@@ -1,12 +1,17 @@
 <div class="medium-4 columns float-right" id="message-container">
 	<h4 class="section-title text-center">Messages</h4>
-	<div class="row message-row" id="first-message" >
-			<div class="message-losenge left float-left">
-				<span class="message-text">Your server is ready! You can now <strong>choose an audio source</strong>...</span>
-				<span class="message-time">Now</span>
-			</div>
+	<div class="row message-row" id="second-message" >
+		<div class="message-losenge left float-left">
+			<span class="message-text">You're on the air!</strong>...</span>
+			<span class="message-time">Now</span>
 		</div>
-
+	</div>
+	<div class="row message-row" id="first-message" >
+		<div class="message-losenge left float-left">
+			<span class="message-text">Your server is ready! You can now <strong>choose an audio source</strong>...</span>
+			<span class="message-time">Now</span>
+		</div>
+	</div>
 	{% for message in site.data.messages reversed %}
 		<div class="row message-row">
 			<div class="message-losenge {{message.side}} float-{{message.side}}">
@@ -16,16 +21,15 @@
 		</div>
 	{% endfor %}
 </div>
-			<form id="chat-form">
+<form id="chat-form">
 	<div id="chat-input" class="clearfix">
 		<div  id="chat-icon" class="float-left">{% include svg_icon.svg name='chat'%}</div>
 		<div id="chat-input-field" class="float-left">
-      <label>
-        <input type="text" placeholder="">
-        <input id="hidden-input" type="hidden" placeholder="">
-
-      </label>
- 
+			<label>
+				<input type="text" placeholder="">
+				<input id="hidden-input" type="hidden" placeholder="">
+			</label>
+			
 		</div>
 		<div class="float-right" id="chat-send">{% include svg_icon.svg name='airplane'%}</div>
 	</div>

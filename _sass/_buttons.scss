@@ -39,6 +39,11 @@ button, .button {
             color: $vr-purple;
         }
 
+        &.btn-green {
+            border-color: $success-color;
+            color: $success-color;
+        }
+
         &.muted {
             border-color: $charcoal;
             color: $charcoal;
@@ -81,6 +86,14 @@ button, .button {
             border-color: $vr-yellow;
             background: $vr-yellow;
             color: $talk-dark;
+        }
+    }
+
+    &.btn-hover-green {
+        &:hover {
+            border-color: $success-color;
+            background: $success-color;
+            color: white;
         }
     }
 

@@ -97,13 +97,7 @@ $('#chat-form').submit(function(event){
     	class : "row message-row"
     	
   	}).append(myLosenge).insertAfter($('#message-container h4'));
-	// $('#message-container h4').after(
-	// 	'<div class="row message-row">'+
-	// 	'<div class="message-losenge right float-right">'+
-	// 			'<span class="message-text">'+ $("#chat-form input").val() + '</span>'+
-	// 			'<span class="message-time">10:29</span>'+
-	// 		'</div>'
-	// 	);
+
 	//animate it in:
 	TweenMax.set(newChat,{autoAlpha:0,display:"none", transformOrigin: "50% 50%", marginTop:"-50px",scaleX:1.2,scaleY:1.2})
 	TweenMax.to(newChat,.5,{autoAlpha:1, display: "block", scaleX:1, scaleY:1, marginTop:0, ease:Bounce.easeOut})
@@ -153,11 +147,6 @@ $('#close-advice').on('click',function(){
 });
 
 
-//stop stream
-$("#circles svg rect#stopButton").on('click',function(){
-	console.log('I clicked stop, Jim!')
-	ringsTL.play()
-});
 
 
 // $('#venue-title').on('click',function(){
@@ -459,6 +448,7 @@ $('#speakers a').on('click',function(){
 });
 
 		TweenMax.set($('#first-message'),{autoAlpha:0,display:"none",scaleX:1.2,scaleY:1.2})
+		TweenMax.set($('#second-message'),{autoAlpha:0,display:"none",scaleX:1.2,scaleY:1.2})
 
 	$(document).ready(function(){
 		

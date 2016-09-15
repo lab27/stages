@@ -193,7 +193,7 @@ ringsTL
 //connected (add meter)
 .to(sourceBase,.2,{stroke:vrGreen,strokeDasharray:"0 0",onComplete:function(){
 	buttonText.html('connected')
-	$('#audioElement').trigger('play');
+	$('#audioElement').trigger("play");
 	var sourceOverlay = svgContainer.insert("circle")
 	.attr("cx", "50%")
 	.attr("cy", "50%")
@@ -214,6 +214,9 @@ ringsTL
 .addPause()
 .to(streamBase,.2,{stroke:vrGreen})
 .to(button,.2,{autoAlpha:0,onComplete:function(){
+	TweenMax.set($('#second-message'),{position:"relative",left:0,bottom:0})
+	TweenMax.set($('#second-message .message-losenge'),{background:vrYellow})
+	TweenMax.to($('#second-message'),.5,{autoAlpha:1, display: "block", scaleX:1, scaleY:1, ease:Bounce.easeOut})
 	var stopButton = svgContainer.insert("rect")
 	.attr("rx", "2")
 	.attr("ry", "2")
@@ -258,13 +261,19 @@ ringsTL
 //stream ring turns gray
 .to(streamBase,.2,{stroke:"#bbb",onComplete:function(){
 	console.log('finished making stream gray')
+	//hide stop button
 	svgContainer.selectAll("rect#stopButton").attr("class","hide");
 	clearInterval(interval)
 	$('#chat-form input').val('The Talk has ended.')
 	$('#chat-form').submit()
+	$('#main-modal #modal-box p.lead').html('Wud u lik 2 skdyl yr necks tok?')
+	//$('#main-modal #modal-box .cancel').addClass('hide')
+	$('#main-modal #modal-box .cancel').removeClass('btn-red').html("No, thanks")
+	$('#main-modal #modal-box .yes').html("yes").addClass("btn-green btn-hover-green").on('click',function(){
+		//alert("nice one!")
+		TweenMax.to($("#main-modal"),.2,{autoAlpha:0})
+	})
 }})
-//hide stop button
-// .to($('#circles svg rect#stopButton'),.2,{autoAlpha:0, onComplete:function(){
-// 	//stop counter
-// }})
+.to($('#main-modal'),.2,{autoAlpha:1})
+
 
