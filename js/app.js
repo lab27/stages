@@ -43,7 +43,7 @@ var tmax_options = {
   useFrames: false,
   onStart: function() {
     console.log('on start called');
-    showNextMsg();
+    //showNextMsg();
   },
   onStartScope: {},
   onUpdate: function() {
@@ -178,15 +178,28 @@ var vrBlue 		= "#2c46b0",
 	vrBeige 	= "#fef1de";
 	neutralColor=	"#b4b6be";
 
-$(startBtn).on('click',function(){
-	$('#audioElement').trigger('play');
-	//$('#stream-circle').addClass('success')
-	//$(this).addClass('hide')
-	//renderChart()
+// $(startBtn).on('click',function(){
+// 	$('#audioElement').trigger('play');
+// 	//$('#stream-circle').addClass('success')
+// 	//$(this).addClass('hide')
+// 	//renderChart()
+// });
+// var pauseTheSound = function(){
+// 	console.log('pause the sound...')
+// 	$('#audioElement')[0].pause();
+// };
+
+var playTheSound = function(){
+	console.log('play the sound...')
+	$('#audioElement')[0].play();
+};
+
+
+
+$("#toggles button").on('click',function(){
+	console.log("clicked a toggle")
+	playTheSound()
 });
-
-
-
 
 $(window).on('resize', function(){
 	//console.log('resize windw')
@@ -205,24 +218,24 @@ var currentMsg = 0;
 var nextMsg = 1;
 
 //show the next msg
-var showNextMsg = function() {
-	console.log("show next message called")
-	//console.log("next msg: " + nextMsg.attr('id'))
+// var showNextMsg = function() {
+// 	console.log("show next message called")
+// 	//console.log("next msg: " + nextMsg.attr('id'))
 
 
-	var targetMsgBox = $('#messagebox'+currentMsg)
-	var nextMsgBox = $('#messagebox'+nextMsg)
-	console.log("target: " + targetMsgBox.attr('id'))
-	$(nextMsgBox).removeClass('hide')
-	//tl.play()
-	TweenMax.to(targetMsgBox,.5,{autoAlpha:0,ease:Power2.easeOut, onComplete:function(){
-		$(targetMsgBox).remove()
-		TweenMax.to(nextMsgBox,.5,{autoAlpha:1,marginTop:"0%",ease:Power2.easeOut, onComplete:function(){
-					nextMsg += 1
-		currentMsg += 1
-		}})
-	}})
-};
+// 	var targetMsgBox = $('#messagebox'+currentMsg)
+// 	var nextMsgBox = $('#messagebox'+nextMsg)
+// 	console.log("target: " + targetMsgBox.attr('id'))
+// 	$(nextMsgBox).removeClass('hide')
+// 	//tl.play()
+// 	TweenMax.to(targetMsgBox,.5,{autoAlpha:0,ease:Power2.easeOut, onComplete:function(){
+// 		$(targetMsgBox).remove()
+// 		TweenMax.to(nextMsgBox,.5,{autoAlpha:1,marginTop:"0%",ease:Power2.easeOut, onComplete:function(){
+// 					nextMsg += 1
+// 		currentMsg += 1
+// 		}})
+// 	}})
+// };
 
 //temp trigger with Logo
 $('.avatar').on('click',function(){

@@ -189,11 +189,11 @@ ringsTL
 .addPause()
 //connecting
 .to(buttonText,.2,{autoAlpha:1,fill:vrLtBlue})
-.to(sourceBase,.2,{stroke:vrLtBlue,strokeDasharray:"4 8",className:"+=connecting"})
+.to(sourceBase,.2,{stroke:vrLtBlue,strokeDasharray:"4 8",className:"+=connecting",onComplete:playTheSound})
 //connected (add meter)
 .to(sourceBase,.2,{stroke:vrGreen,strokeDasharray:"0 0",onComplete:function(){
+	
 	buttonText.html('connected')
-	$('#audioElement').trigger("play");
 	var sourceOverlay = svgContainer.insert("circle")
 	.attr("cx", "50%")
 	.attr("cy", "50%")
@@ -261,19 +261,49 @@ ringsTL
 //stream ring turns gray
 .to(streamBase,.2,{stroke:"#bbb",onComplete:function(){
 	console.log('finished making stream gray')
+	//pauseTheSound()
 	//hide stop button
 	svgContainer.selectAll("rect#stopButton").attr("class","hide");
 	clearInterval(interval)
 	$('#chat-form input').val('The Talk has ended.')
 	$('#chat-form').submit()
-	$('#main-modal #modal-box p.lead').html('Wud u lik 2 skdyl yr necks tok?')
-	//$('#main-modal #modal-box .cancel').addClass('hide')
+	$('#main-modal #modal-box p.lead').html('Please disconnect your streaming client...')
+	$('#main-modal #modal-box .cancel').addClass('hide')
+	$('#main-modal #modal-box .yes').addClass("hide")
+	
+}})
+// .to($('#main-modal'),.2,{autoAlpha:1,onComplete:function(){
+// 	$('#main-modal #modal-box p.lead').html('Wud u lik 2 skdyl yr necks tok?')
+// 	$('#main-modal #modal-box .cancel').removeClass('btn-red').html("No, thanks")
+// 	$('#main-modal #modal-box .yes').html("yes").addClass("btn-green btn-hover-green").on('click',function(){
+// 		//alert("nice one!")
+// 		TweenMax.to($("#main-modal"),.2,{autoAlpha:0})
+
+// 	})
+// 	$('#main-modal #modal-box p.lead').html('Please disconnect your streaming client...')
+// 	$('#main-modal #modal-box .cancel').addClass('hide')
+// 	$('#main-modal #modal-box .yes').addClass("hide")
+// }})
+.to($('#main-modal'),.2,{autoAlpha:1,onComplete:function(){
+	setTimeout(function(){
+  		TweenMax.to($('#main-modal'),.2,{autoAlpha:0,onComplete:function(){
+
+  			$('#audioElement')[0].pause();
+  			$('#main-modal #modal-box p.lead').html('Wud u lik 2 skdyl yr necks tok?')
 	$('#main-modal #modal-box .cancel').removeClass('btn-red').html("No, thanks")
 	$('#main-modal #modal-box .yes').html("yes").addClass("btn-green btn-hover-green").on('click',function(){
 		//alert("nice one!")
 		TweenMax.to($("#main-modal"),.2,{autoAlpha:0})
 	})
+  		}})
+	}, 3000);
+	}})
+.to(sourceBase,.2,{stroke:"#bbb",onComplete:function(){
+	console.log('disconnected')
+	
 }})
-.to($('#main-modal'),.2,{autoAlpha:1})
+.add("newtalk")
+.to($('#main-modal'),.2,{autoAlpha:1},"newtalk")
+
 
 
