@@ -79,6 +79,16 @@ var buttonText = svgContainer.append("text")
 	.attr("fill", vrLtBlue)
 	.html("launching...");
 
+var stopText = svgContainer.append("text")
+	.attr("x", "50%")
+	.attr("height", 12)
+	.attr("y", (svgWidth/2)+60)
+	.attr("text-anchor", "middle")
+	//.attr("class","hide")
+	.attr("id","stopText")
+	.attr("fill", vrRed)
+	.html("Stop Streaming");
+
 
 var UILabels = svgContainer.append("g")
 	.attr("id","ui-labels");
@@ -164,6 +174,7 @@ $("#main-modal #modal-box button").on('click',function(){
 //set initial states:
 TweenMax.set(serverOverlay,{rotation:-90,transformOrigin: "50% 50%",drawSVG:"0%",stroke:vrLtBlue})
 TweenMax.set(streamOverlay,{rotation:-90,transformOrigin: "50% 50%",drawSVG:"0%",stroke:"black",strokeOpacity:".3"})
+TweenMax.set(stopText,{autoAlpha:0})
 //set up timeling
 var ringsTL = new TimelineMax(tmax_options);
 //server starts
@@ -243,6 +254,7 @@ ringsTL
     },100);
 })();
 }})
+.to(stopText,.2,{autoAlpha:1})
 .to(buttonText,.2,{fill:"#666", onComplete:function(){
 	//prepare the stopping early modal text
 	$('#main-modal #modal-box p.lead').html('Are you sure you want to stop early?')
@@ -272,6 +284,7 @@ ringsTL
 	$('#main-modal #modal-box .yes').addClass("hide")
 	
 }})
+.to(stopText,.2,{autoAlpha:0})
 // .to($('#main-modal'),.2,{autoAlpha:1,onComplete:function(){
 // 	$('#main-modal #modal-box p.lead').html('Wud u lik 2 skdyl yr necks tok?')
 // 	$('#main-modal #modal-box .cancel').removeClass('btn-red').html("No, thanks")
