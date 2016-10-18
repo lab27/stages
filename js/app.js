@@ -471,3 +471,6 @@ $('#speakers a').on('click',function(){
 
 	})
 
+$("#autostart-btn").on("click",function(){
+	$(this).toggleClass("active")
+})

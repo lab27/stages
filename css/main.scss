@@ -132,10 +132,15 @@ h4.section-title {
         }
 
         &.active {
-        background:$success-color;
-        color:white;
+            background:$success-color;
+            color:white;
         }
+
+
     }
+
+
+
 .menu>li {
 display: inline-block; }
 
@@ -416,8 +421,30 @@ hr {
             margin-left:6px;
                 }
         }
+
+&.active {
+    background:none;
+    color:$success-color;
+    &:after {
+        content:"Keep this page open";
+        color: $oil;
+        background:$vr-yellow;
+        display:block;
+        position:absolute;
+        padding: 6px 7px;
+        border-radius: 3px;
+        @include box-shadow(1px, 0.3);
+        margin-top: 6px;
+        pointer-events:none;
+    }
 }
 
+}
+
+
+    #toggles button#autostart-btn .active {
+    
+}
 #talkbar {
     background: #f9f9f9;
     position: relative;
@@ -943,12 +970,17 @@ html, body {
 
 .listener-info {
     margin-left:12px;
-    color: $topbar-dark;
+    background: rgba($topbar-dark,.5);
+    color: $ghost;
+      font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
     svg {
-        width: 18px;
-  height: 18px;
-  vertical-align: sub;
-  margin-right: 2px;
+        width: 12px;
+        height: 12px;
+        vertical-align: middle;
+        margin-right: 2px;
+        margin-top:-3px;
     }
 }
 
